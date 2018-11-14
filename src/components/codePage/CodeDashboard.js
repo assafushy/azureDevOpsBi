@@ -28,13 +28,13 @@ export default class CodeDashboard extends Component {
             scrollButtons="on"
             indicatorColor="primary"
             textColor="primary"
-          >
+        >
             <Tab label="Git vs TFVC" icon={<img src={GitIcon} alt="Git logo" />} value={0} />
             <Tab label="Git Status" icon={<img src={GitBranchIcon} alt="Git branch logo" />} value={1} />
         </Tabs>   
 
-        {this.state.activeTabValua === 0 && <GitVSTfvcTab/>}
-        {this.state.activeTabValua === 1 && <p>git status</p>}
+        {this.state.activeTabValua === 0 && <GitVSTfvcTab  sumOfRepos={500}/>}
+        {this.state.activeTabValua === 1 && <h1 align={'center'}>Under Construction</h1>}
 
       </div>
     )

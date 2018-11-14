@@ -26,8 +26,6 @@ export default class MainBar extends Component {
                 <TopLevelFilterSet/>
               </Grid>
             </Grid>
-
-
           </Toolbar>
         </AppBar>
       </div>
