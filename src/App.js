@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {bindActionCreators} from 'redux';
+import {connect,} from 'react-redux';
 import MainBar from './components/appBar/MainBar';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -49,4 +51,18 @@ class App extends Component {
   }
 }
 
-export default App;
+
+function mapStateToProps(state){
+  return{
+      
+  }
+}
+
+function matchDispachToProps(dispatch){
+  return bindActionCreators({
+      
+  }
+  ,dispatch)
+}
+
+export default connect(mapStateToProps,matchDispachToProps)(App);
