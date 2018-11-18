@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -6,32 +7,48 @@ import FormControl from '@material-ui/core/FormControl';
 import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
-// import PropTypes from 'prop-types'
+
+import {SelectedDeselectProjects} from '../../redux/actions/globalDataActions';
+import store from '../../redux/store';
 
 export default class componentName extends Component {
-  // static propTypes = {
-  //   prop: PropTypes
-  // }
+  
+  isSelected(isSelected){
+    if(isSelected){
+      return true
+    }else{
+      if(isSelected === undefined){
+        return true;
+      }
+      return false;
+    }
+  }//isSelected
 
   render() {
     return (
       <div>
         <FormControl>
-                <InputLabel style={{color:'white'}} htmlFor="select-multiple-checkbox">{this.props.title}</InputLabel>
+                <InputLabel style={{color:'white'}} htmlFor="select-multiple-checkbox">
+                  {this.props.title}
+                </InputLabel>
                 <Select
                   multiple
                   value={[]}
-                  onChange={()=>{}}
+                  onChange={(e,child)=>{store.dispatch(SelectedDeselectProjects(child.key))}}
+                  onClose={(e)=>{console.log("reudux updated")}}
                   input={<Input id="select-multiple-checkbox" />}
                   renderValue={selected=>selected}
-                  style={{minWidth:150,color:'white'}}
+                  style={{minWidth:200,color:'white'}}
                 >
-                  {['ElisraCollection','ModinCollection'].map(name => (
-                    <MenuItem key={name} value={name}>
-                      <Checkbox checked={true} />
-                      <ListItemText primary={name} />
+                  {console.log(this.props.dataList.value)}
+                  {(this.props.dataList !== 0 && this.props.dataList !== undefined)?
+                    this.props.dataList.value.map(item => (
+                    <MenuItem key={item.id} value={item.name}>
+                      <Checkbox checked={this.isSelected(item.selected)} />
+                      <ListItemText primary={item.name} />
                     </MenuItem>
-                  ))}
+                  ))
+                  : null}
                   </Select>
                  </FormControl> 
               

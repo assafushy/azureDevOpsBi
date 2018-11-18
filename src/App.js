@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect,} from 'react-redux';
+import {fetchAllServerProjects} from './redux/actions/globalDataActions';
+
 import MainBar from './components/appBar/MainBar';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -19,6 +21,10 @@ class App extends Component {
     }
   }//constructor
 
+  componentDidMount(){
+    this.props.fetchAllServerProjects();
+  }
+
   toggleDrawer(){
     (this.state.toggleDrawerMenu)?
     this.setState({"toggleDrawerMenu":false}):
@@ -29,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <MainBar toggleMenu={this.toggleDrawer.bind(this)}/>
+      <MainBar toggleMenu={this.toggleDrawer.bind(this)} globalData={this.props.globalData}/>
        <Drawer anchor="left" open={this.state.toggleDrawerMenu} onClose={()=>{this.toggleDrawer()}}>
           <div
             tabIndex={0}
@@ -54,15 +60,15 @@ class App extends Component {
 
 function mapStateToProps(state){
   return{
-      
+    globalData:state.globalData
   }
-}
+}//mapStateToProps
 
 function matchDispachToProps(dispatch){
   return bindActionCreators({
-      
+    fetchAllServerProjects
   }
   ,dispatch)
-}
+}//matchDispachToProps
 
 export default connect(mapStateToProps,matchDispachToProps)(App);

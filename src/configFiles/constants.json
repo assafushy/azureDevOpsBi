@@ -1,3 +1,4 @@
 {
-  "dummyData":"dummy"
+  "FETCH_PROJECTS":"FETCH_PROJECTS",
+  "SELECT_PROJECT":"SELECT_PROJECT"
 }

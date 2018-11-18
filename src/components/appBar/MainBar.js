@@ -23,7 +23,7 @@ export default class MainBar extends Component {
                 </Typography>
               </Grid>
               <Grid sm={9}>
-                <TopLevelFilterSet/>
+                <TopLevelFilterSet globalData={this.props.globalData}/>
               </Grid>
             </Grid>
           </Toolbar>
