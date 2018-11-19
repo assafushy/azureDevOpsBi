@@ -1,14 +1,13 @@
 import C from '../../configFiles/constants.json';
 
 export default (state={
-                    "collectionData" : [],
-                    "teamProjectsData": [],
+                    "gitRepos" : [],
                     }
                     ,action) =>{
 
     switch(action.type){
-        // case C.CATALOG_IS_FETCHING:
-        //     return{...state,fetchingCatalogData:action.payload}
+        case C.FETCH_ALL_PROJECTS__GIT_REPOS:
+            return{...state,gitRepos:action.payload}
         default:
             return state;
             
