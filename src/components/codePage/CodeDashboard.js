@@ -34,14 +34,14 @@ class CodeDashboard extends Component {
             <Tab label="Git Status" icon={<img src={GitBranchIcon} alt="Git branch logo" />} value={1} />
         </Tabs>   
 
-        {this.state.activeTabValue === 0 && <GitVSTfvcTab sumOfRepos={this.calculateReposCount(this.props.codeData)}/>}
+        {this.state.activeTabValue === 0 && <GitVSTfvcTab  globalData={this.props.globalData} codeData={this.props.codeData} sumOfRepos={this.calculateReposCount(this.props.codeData.gitRepos)}/>}
         {this.state.activeTabValue === 1 && <h1 align={'center'}>Under Construction</h1>}
 
       </div>
     )
   }//render
 
-  calculateReposCount(repoArray=[]){
+  calculateReposCount(repoArray=[]){  
     let RepoCount = 0;
     console.log(repoArray)
 
