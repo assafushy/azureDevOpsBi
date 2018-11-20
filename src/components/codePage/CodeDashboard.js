@@ -13,10 +13,12 @@ class CodeDashboard extends Component {
   constructor(){
     super();
     this.state = {
-      activeTabValua : 0
+      "activeTabValue" : 0,
+
     }
   }//constructor
   
+
   render() {
     return (
       <div>
@@ -32,27 +34,25 @@ class CodeDashboard extends Component {
             <Tab label="Git Status" icon={<img src={GitBranchIcon} alt="Git branch logo" />} value={1} />
         </Tabs>   
 
-        {this.state.activeTabValua === 0 && <GitVSTfvcTab sumOfRepos={500}/>}
-        {this.state.activeTabValua === 1 && <h1 align={'center'}>Under Construction</h1>}
+        {this.state.activeTabValue === 0 && <GitVSTfvcTab sumOfRepos={this.calculateReposCount(this.props.codeData)}/>}
+        {this.state.activeTabValue === 1 && <h1 align={'center'}>Under Construction</h1>}
 
       </div>
     )
   }//render
 
+  calculateReposCount(repoArray=[]){
+    let RepoCount = 0;
+    console.log(repoArray)
+
+    repoArray.forEach(repoList => {
+      RepoCount += repoList.count;
+    });
+
+    return RepoCount;
+  }//calculateReposCount
  
 }//class
 
-function mapStateToProps(state){
-  return{
-    globalData:state.globalData,
-    codeData:state.codeData
-  }
-}//mapStateToProps
 
-function matchDispachToProps(dispatch){
-  return bindActionCreators({ 
-  }
-  ,dispatch)
-}//matchDispachToProps
-
-export default connect(mapStateToProps,matchDispachToProps)(CodeDashboard);
+export default CodeDashboard;

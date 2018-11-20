@@ -51,16 +51,16 @@ class App extends Component {
           </List> 
           </div>
         </Drawer>
-        <CodeDashboard/>
+        <CodeDashboard globalData={this.props.globalData} codeData={this.props.codeData}/>
       </div>
     );
   }
 }
 
-
 function mapStateToProps(state){
   return{
-    globalData:state.globalData
+    globalData:state.globalData,
+    codeData:state.codeData
   }
 }//mapStateToProps
 

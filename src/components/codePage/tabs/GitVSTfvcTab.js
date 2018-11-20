@@ -29,7 +29,7 @@ export default class GitVSTfvcTab extends Component {
               <LineChart/> 
           </Grid>    
           <Grid item sm={6}>
-            <SourceControlPanel teamProjectData={sampleTeamProjectData} sourceControlType='git' sumOfRepos={500} sourceControlLogo={GitLogo}/>
+            <SourceControlPanel teamProjectData={sampleTeamProjectData} sourceControlType='git' sumOfRepos={this.props.sumOfRepos} sourceControlLogo={GitLogo}/>
           </Grid>
           <Grid item sm={6}>
             <SourceControlPanel teamProjectData={sampleTeamProjectData} sourceControlType='TFVC' sumOfRepos={350} sourceControlLogo={TfvcLogo}/>  
