@@ -8,15 +8,15 @@ import GitLogo from '../../../imgs/GitLogo.png';
 
 
 
-// const sampleTeamProjectData =[
-//   {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-//   {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-//   {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-//   {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-//   {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-//   {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-//   {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]}
-// ]
+const sampleTeamProjectData =[
+  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
+  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
+  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
+  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
+  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
+  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
+  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]}
+]
 
 export default class GitVSTfvcTab extends Component {
   
