@@ -14,7 +14,6 @@ class CodeDashboard extends Component {
     super();
     this.state = {
       "activeTabValue" : 0,
-
     }
   }//constructor
   
@@ -34,19 +33,26 @@ class CodeDashboard extends Component {
             <Tab label="Git Status" icon={<img src={GitBranchIcon} alt="Git branch logo" />} value={1} />
         </Tabs>   
 
-        {this.state.activeTabValue === 0 && <GitVSTfvcTab  globalData={this.props.globalData} codeData={this.props.codeData} sumOfRepos={this.calculateReposCount(this.props.codeData.gitRepos)}/>}
+        {this.state.activeTabValue === 0 && <GitVSTfvcTab  globalData={this.props.globalData} 
+                                                           codeData={this.props.codeData} 
+                                                           sumOfGitRepos={this.calculateReposCount(this.props.codeData.gitRepos)} 
+                                                           sumOfTFVCRepos={this.calculateReposCount(this.props.codeData.tfvcRepos,'TFVC')}/>}
         {this.state.activeTabValue === 1 && <h1 align={'center'}>Under Construction</h1>}
 
       </div>
     )
   }//render
 
-  calculateReposCount(repoArray=[]){  
+  calculateReposCount(repoArray=[],srcType='git'){  
     let RepoCount = 0;
     console.log(repoArray)
 
     repoArray.forEach(repoList => {
-      RepoCount += repoList.count;
+      if (srcType === 'git') {
+        RepoCount += repoList.count;
+      }else{
+        if(repoList.count){RepoCount += 1;}
+      }
     });
 
     return RepoCount;

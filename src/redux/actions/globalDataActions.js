@@ -1,20 +1,21 @@
 import store from '../store';
 import C from '../../configFiles/constants.json';
 import {getProjectList} from '../../azureDevopsRESTAPI/projectData';
-import {fetchAllGitReposetories} from './codeDataActions';
+import {fetchAllGitReposetories,fetchAllTFVCReposetories} from './codeDataActions';
 
 import _ from 'lodash';
 
 export function fetchAllServerProjects(){   
-  let repoData=[];
+  let projectData=[];
   // store.dispatch(isLoading(true));
   const req = getProjectList();
     return (dispatch)=>{  
       return req.then((data)=>{
-        repoData=data.data.value;
+        projectData=data.data.value;
        dispatch({type:C.FETCH_PROJECTS,payload:data.data})     
     ;}).then(()=>{
-      fetchAllGitReposetories(repoData);
+      fetchAllGitReposetories(projectData);
+      fetchAllTFVCReposetories(projectData);
     })
   }//dispatch
 }
