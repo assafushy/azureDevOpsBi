@@ -45,14 +45,14 @@ class CodeDashboard extends Component {
 
   calculateReposCount(repoArray=[],srcType='git'){  
     let RepoCount = 0;
-    console.log(repoArray)
-
     repoArray.forEach(repoList => {
-      if (srcType === 'git') {
-        RepoCount += repoList.count;
-      }else{
-        if(repoList.count){RepoCount += 1;}
-      }
+     if(repoList.count){
+      RepoCount += 1
+     }else{
+      repoList.forEach(()=>{
+        RepoCount += 1;
+      })
+     } 
     });
 
     return RepoCount;

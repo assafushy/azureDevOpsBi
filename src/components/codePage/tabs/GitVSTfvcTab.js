@@ -8,32 +8,23 @@ import GitLogo from '../../../imgs/GitLogo.png';
 
 
 
-const sampleTeamProjectData =[
-  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]},
-  {title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]}
-]
+// sampleTeamProjectData = [{title:'Team Title',codeSourcesList:[{title:'repoTitle',sourceLogo:GitLogo}]}]
 
 export default class GitVSTfvcTab extends Component {
   
   teamProjectDataFactory(teamProjectArray={value:[]},repoArray=[],type='git'){
     let mergedData=[];
 
-    if(typeof teamProjectArray === 'object' ){
+    if(teamProjectArray.value !== undefined){
       teamProjectArray.value.forEach(teamProject => {
        let project = {title:teamProject.name,codeSourcesList:[]};
         if(type==='git'){
-          repoArray.forEach(teamRepos=>{
-            teamRepos.value.forEach(repo=>{
-            if(repo.project.id === teamProject.id){
-              project.codeSourcesList.push({title:repo.name,id:repo.id,sourceLogo:GitLogo})
-            }
+            repoArray.forEach(teamRepos=>{
+                teamRepos.forEach(repo=>{
+                if(repo.project.id === teamProject.id){
+                  project.codeSourcesList.push({title:repo.name,id:repo.id,sourceLogo:GitLogo})
+              }})//foreach
             })//foreach
-          })//foreach
           if(project.codeSourcesList.length > 0){mergedData.push(project);}
         }else{//TFVC
           repoArray.forEach(teamRepos=>{

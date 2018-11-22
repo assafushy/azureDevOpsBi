@@ -4,7 +4,8 @@ export default (state={
                     "collectionData" : [],
                     "selectedCollections":[],
                     "teamProjectsData": [],
-                    "selectedTeamProject":[]
+                    "selectedTeamProject":[],
+                    "globalSettings":{"activeRepoPeriodInMonths":1}
                     }
                     ,action) =>{
 
