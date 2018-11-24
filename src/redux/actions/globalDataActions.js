@@ -1,7 +1,7 @@
 import store from '../store';
 import C from '../../configFiles/constants.json';
 import {getProjectList} from '../../azureDevopsRESTAPI/projectData';
-import {fetchAllGitReposetories,fetchAllTFVCReposetories} from './codeDataActions';
+import {fetchAllGitReposetories,fetchAllTFVCReposetories,fetchSrcContorlTrendChartData} from './codeDataActions';
 
 import _ from 'lodash';
 
@@ -16,6 +16,8 @@ export function fetchAllServerProjects(){
     ;}).then(()=>{
       fetchAllGitReposetories(projectData);
       fetchAllTFVCReposetories(projectData);
+      fetchSrcContorlTrendChartData();
+
     })
   }//dispatch
 }

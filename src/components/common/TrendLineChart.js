@@ -2,9 +2,10 @@
 import React from 'react';
 import {Line as LineChart} from 'react-chartjs-2';
 
-function chartData() {
+function chartData(chartDataObject) {
+  console.log(`chart data :${JSON.stringify(chartDataObject)}`)
   return {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: chartDataObject.labels,
     datasets: [
       {
         label: 'Git Active Repos',
@@ -14,7 +15,7 @@ function chartData() {
         pointStrokeColor: '#fff',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(220,220,220,1)',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: chartDataObject.gitActiveReposByMonth,
       },
       {
         label: 'TFVC Active Repos',
@@ -24,7 +25,7 @@ function chartData() {
         pointStrokeColor: '#fff',
         pointHighlightFill: '#fff',
         pointHighlightStroke: 'rgba(151,187,205,1)',
-        data: [28, 48, 40, 19, 86, 27, 90],
+        data: chartDataObject.TFVCActiveReposByMonth,
       },
     ]
   }
@@ -59,7 +60,7 @@ class TrendLindeChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      data: chartData()
+      data: chartData(this.props.chartData)
     }
   }
 

@@ -49,7 +49,7 @@ export default class GitVSTfvcTab extends Component {
         <br/>
         <Grid container spacing={12} > 
           <Grid item sm={12}>
-              <LineChart/> 
+              <LineChart chartData={this.props.codeData.srcControlTrendChartData}/> 
           </Grid>    
           <Grid item sm={6}>
             <SourceControlPanel teamProjectData={this.teamProjectDataFactory(this.props.globalData.teamProjectsData,this.props.codeData.gitRepos,'git')}

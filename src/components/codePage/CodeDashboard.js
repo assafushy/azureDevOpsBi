@@ -36,14 +36,14 @@ class CodeDashboard extends Component {
         {this.state.activeTabValue === 0 && <GitVSTfvcTab  globalData={this.props.globalData} 
                                                            codeData={this.props.codeData} 
                                                            sumOfGitRepos={this.calculateReposCount(this.props.codeData.gitRepos)} 
-                                                           sumOfTFVCRepos={this.calculateReposCount(this.props.codeData.tfvcRepos,'TFVC')}/>}
+                                                           sumOfTFVCRepos={this.calculateReposCount(this.props.codeData.tfvcRepos)}/>}
         {this.state.activeTabValue === 1 && <h1 align={'center'}>Under Construction</h1>}
 
       </div>
     )
   }//render
 
-  calculateReposCount(repoArray=[],srcType='git'){  
+  calculateReposCount(repoArray=[]){  
     let RepoCount = 0;
     repoArray.forEach(repoList => {
      if(repoList.count){

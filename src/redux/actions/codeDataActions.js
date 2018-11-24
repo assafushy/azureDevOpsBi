@@ -2,6 +2,8 @@ import C from '../../configFiles/constants.json';
 import {fetchAllGitReposByTeamProject,fetchAllTFVCReposByTeamProject,fetchAllTFVCChangeSetsByTeamProject,fetchAllGitRepoPushesByTeamProject} from '../../azureDevopsRESTAPI/codeData';
 import store from '../store';
 import _ from 'lodash';
+import moment from 'moment';
+
 export async function fetchAllGitReposetories(teamProjectsList=[]){   
   let reposList=[]
   
@@ -53,3 +55,19 @@ export async function fetchAllTFVCReposetories(teamProjectsList=[]){
   }));//Promise.all
   store.dispatch({type:C.FETCH_ALL_PROJECTS__TFVC_REPOS,payload:TFVCRepos})
 }//fetchAllTFVCReposetories
+
+export async function fetchSrcContorlTrendChartData(){
+  
+  let chartData = {
+    "labels":['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+    "gitActiveReposByMonth":[1,4,6,7,7,7,9,10,24,56,45,23],
+    "TFVCActiveReposByMonth":[23,18,15,15,15,6,17,12,23,12,8,3],
+  };
+
+
+  return (dispatch)=>{
+    dispatch({type:C.FETCH_SRC_CONTROL_TREND_CHART_DATA,payload:chartData});
+  }
+  
+}//fetchSrcContorlTrendChartData
+
