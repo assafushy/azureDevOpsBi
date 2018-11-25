@@ -57,17 +57,10 @@ const styles = {
 
 class TrendLindeChart extends React.Component {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      data: chartData(this.props.chartData)
-    }
-  }
-
   render() {
     return (
       <div style={styles.graphContainer}>
-        <LineChart data={this.state.data}
+        <LineChart data={chartData(this.props.chartData)}
           options={options} height={50}/>
       </div>
     )

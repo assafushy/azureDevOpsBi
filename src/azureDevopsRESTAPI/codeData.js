@@ -5,18 +5,19 @@ import moment from 'moment';
 
 //GIT---------------------------------------------------------------
   //fetches all Git Repos by teamProjects
-export function fetchAllGitReposByTeamProject(teamProjectId) { 
+export async function fetchAllGitReposByTeamProject(teamProjectId) { 
   //https://assafushy.visualstudio.com/0cc08e1d-c1c7-47ef-9d20-298e9764f26f/_apis/git/repositories?api-version=4.1
-  return axios.get(`https://assafushy.visualstudio.com/${teamProjectId}/_apis/git/repositories?api-version=4.1`);
+  return await axios.get(`https://assafushy.visualstudio.com/${teamProjectId}/_apis/git/repositories?api-version=4.1`);
 }//fetchAllGitReposByTeamProject
  
   //fetches all Git pushes to a repo in dates
-export function fetchAllGitRepoPushesByTeamProject(RepoData,fromDate=undefined,toDate=undefined) { 
+export async function fetchAllGitRepoPushesByTeamProject(RepoData,fromDate=undefined,toDate=undefined) { 
   //Default values for date - one month ago
   if(!fromDate){fromDate = moment().subtract(1,'months').toISOString();}
   if(!toDate){toDate = moment().toISOString();}  
   //https://assafushy.visualstudio.com/0cc08e1d-c1c7-47ef-9d20-298e9764f26f/_apis/git/repositories/4bd4d6c4-462f-4f3f-8458-8366f0bf3501/pushes?searchCriteria.toDate=2018-11-22T17:53:41.726Z&searchCriteria.fromDate=2016-01-22T17:53:41.726Z
-  return axios.get(`https://assafushy.visualstudio.com/${RepoData.project.id}/_apis/git/repositories/${RepoData.id}/pushes?searchCriteria.toDate=${toDate}&searchCriteria.fromDate=${fromDate}`);
+  console.log(`https://assafushy.visualstudio.com/${RepoData.project.id}/_apis/git/repositories/${RepoData.id}/pushes?searchCriteria.toDate=${toDate}&searchCriteria.fromDate=${fromDate}`);
+  return await axios.get(`https://assafushy.visualstudio.com/${RepoData.project.id}/_apis/git/repositories/${RepoData.id}/pushes?searchCriteria.toDate=${toDate}&searchCriteria.fromDate=${fromDate}`);
 }//fetchAllGitRepoPushesByTeamProject
   
 //TFVC---------------------------------------------------------------

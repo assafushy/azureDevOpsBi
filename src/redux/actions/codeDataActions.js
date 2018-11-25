@@ -8,28 +8,30 @@ import store from '../store';
 export async function fetchAllGitReposetories(teamProjectsList=[]){   
   let reposList=[]
   
-  let resArr = await Promise.all(teamProjectsList.map((teamProject)=>{
-    return fetchAllGitReposByTeamProject(teamProject.id);
-  }));//Promise.all
+  Promise.all(teamProjectsList.map(async (teamProject)=>{
+    return await fetchAllGitReposByTeamProject(teamProject.id);
+  })).then((resArr)=>{
 
+    //gets only for projects with repos - the active Repos
+    Promise.all(resArr.map(async (res,i)=>{
+      let gitRepos= [];
 
-  //gets only for projects with repos - the active Repos
-  reposList = await Promise.all(resArr.map(async (res,i)=>{
-    let gitRepos= [];
-
-    if(res.data.count>0){
-      res.data.value.forEach(async (repo,i)=>{
-        let gitPushes = await fetchAllGitRepoPushesByTeamProject(repo);
-        if(gitPushes.data.count>0){
-          gitRepos.push(repo);
-        }//if
-      })//forEach
-      return gitRepos;
-    }//if
-    return [];
-  }));//Promise.all
-
-  store.dispatch({type:C.FETCH_ALL_PROJECTS__GIT_REPOS,payload:reposList})
+      if(res.data.count>0){
+      
+        res.data.value.forEach(async (repo,i)=>{
+          fetchAllGitRepoPushesByTeamProject(repo).then((gitPushes)=>{
+            if(gitPushes.data.count>0){
+              gitRepos.push(repo);
+            }//if
+          }) 
+        })//forEach
+        return gitRepos;
+      }//if
+      return [];
+    })).then((reposList)=>{
+      store.dispatch({type:C.FETCH_ALL_PROJECTS__GIT_REPOS,payload:reposList})
+    })
+  })
 }//fetchAllGitReposetories
 
 export async function fetchAllTFVCReposetories(teamProjectsList=[]){   
@@ -52,9 +54,7 @@ export async function fetchAllTFVCReposetories(teamProjectsList=[]){
 }//fetchAllTFVCReposetories
 
 export async function fetchSrcContorlTrendChartData(){ 
-  return async (dispatch)=>{
-      let data = await getChartsData();
-      dispatch({type:C.FETCH_SRC_CONTROL_TREND_CHART_DATA,payload:data})
-  }
+  let data = await getChartsData();
+  store.dispatch({type:C.FETCH_SRC_CONTROL_TREND_CHART_DATA,payload:data})
 }//fetchSrcContorlTrendChartData
 
