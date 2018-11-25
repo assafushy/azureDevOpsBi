@@ -1,8 +1,9 @@
 import C from '../../configFiles/constants.json';
-import {fetchAllGitReposByTeamProject,fetchAllTFVCReposByTeamProject,fetchAllTFVCChangeSetsByTeamProject,fetchAllGitRepoPushesByTeamProject} from '../../azureDevopsRESTAPI/codeData';
+import {fetchAllGitReposByTeamProject,fetchAllTFVCReposByTeamProject,
+  fetchAllTFVCChangeSetsByTeamProject,fetchAllGitRepoPushesByTeamProject,
+  getChartsData} from '../../azureDevopsRESTAPI/codeData';
 import store from '../store';
-import _ from 'lodash';
-import moment from 'moment';
+
 
 export async function fetchAllGitReposetories(teamProjectsList=[]){   
   let reposList=[]
@@ -14,9 +15,8 @@ export async function fetchAllGitReposetories(teamProjectsList=[]){
 
   //gets only for projects with repos - the active Repos
   reposList = await Promise.all(resArr.map(async (res,i)=>{
-    let gitRepos= new Array();
+    let gitRepos= [];
 
-    //console.log(res.data);
     if(res.data.count>0){
       res.data.value.forEach(async (repo,i)=>{
         let gitPushes = await fetchAllGitRepoPushesByTeamProject(repo);
@@ -28,12 +28,7 @@ export async function fetchAllGitReposetories(teamProjectsList=[]){
     }//if
     return [];
   }));//Promise.all
- 
-  console.log(reposList)
-  let filteredRepos = reposList.filter(val => (val!==[]));
-  // let filteredRepos = _.filter(reposList,(o)=>{console.log(o);return (o.length>0)});
-  console.log(filteredRepos);
-  
+
   store.dispatch({type:C.FETCH_ALL_PROJECTS__GIT_REPOS,payload:reposList})
 }//fetchAllGitReposetories
 
@@ -56,18 +51,10 @@ export async function fetchAllTFVCReposetories(teamProjectsList=[]){
   store.dispatch({type:C.FETCH_ALL_PROJECTS__TFVC_REPOS,payload:TFVCRepos})
 }//fetchAllTFVCReposetories
 
-export async function fetchSrcContorlTrendChartData(){
-  
-  let chartData = {
-    "labels":['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-    "gitActiveReposByMonth":[1,4,6,7,7,7,9,10,24,56,45,23],
-    "TFVCActiveReposByMonth":[23,18,15,15,15,6,17,12,23,12,8,3],
-  };
-
-
-  return (dispatch)=>{
-    dispatch({type:C.FETCH_SRC_CONTROL_TREND_CHART_DATA,payload:chartData});
+export async function fetchSrcContorlTrendChartData(){ 
+  return async (dispatch)=>{
+      let data = await getChartsData();
+      dispatch({type:C.FETCH_SRC_CONTROL_TREND_CHART_DATA,payload:data})
   }
-  
 }//fetchSrcContorlTrendChartData
 

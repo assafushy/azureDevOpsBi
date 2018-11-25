@@ -18,12 +18,7 @@ const styles = {
   },
 };
 
-class TeamProjectCard extends Component {
-  
-  constructor(){
-    super();
-  }  
-  
+class TeamProjectCard extends Component { 
   
   render() {
     const { classes } = this.props;
@@ -38,9 +33,9 @@ class TeamProjectCard extends Component {
             <Grid container spacing={12}>
               <Grid item sm={1}/>
               <Grid item sm={11}>
-                {this.props.codeSourcesList.map((src)=>{
+                {this.props.codeSourcesList.map((src,i)=>{
                   return(
-                    <Grid container spacing={12}>
+                    <Grid key ={i} container spacing={12}>
                       <Grid item sm={1}>
                         <img src={this.props.sourceLogo} alt='logo' width='30' height='30'/>
                       </Grid>

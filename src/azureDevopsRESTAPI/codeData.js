@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-import store from '../redux/store';
+
 
 
 //GIT---------------------------------------------------------------
@@ -36,3 +36,11 @@ export async function fetchAllTFVCChangeSetsByTeamProject(teamProjectId,fromDate
   return axios.get(`https://assafushy.visualstudio.com/${teamProjectId}/_apis/tfvc/changesets?searchCriteria.fromDate=${fromDate}&searchCriteria.toDate=${toDate}`);
 }//getProjectList
 
+//CODE CHARTS---------------------------------------------------------
+export function getChartsData(){
+    return {
+      "labels":['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+      "gitActiveReposByMonth":[1,4,6,7,7,7,9,10,24,56,45,23],
+      "TFVCActiveReposByMonth":[23,18,15,15,15,6,17,12,23,12,8,3],
+    }; 
+}//getChartsData

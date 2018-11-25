@@ -17,17 +17,17 @@ export default class SourceControlPanel extends Component {
                   <img src={this.props.sourceControlLogo} height="100px" width="100px" alt="git Logo"/>
                 </Grid>
                 <Grid item sm={10}>
-                  <Typography><h1>{this.props.sourceControlType}</h1></Typography>
+                  <Typography variant='h3'>{this.props.sourceControlType}</Typography>
                 </Grid>
               </Grid>
-                <Typography color="textSecondary">
-                  <h2>Number of active git Repos: {this.props.sumOfRepos}</h2>
+                <Typography variant='h5' color="textSecondary">
+                  Number of active Repos: {this.props.sumOfRepos}
                 </Typography>
                 <br/>
               </Paper>
-              {this.props.teamProjectData.map((teamProject)=>{
+              {this.props.teamProjectData.map((teamProject,i)=>{
                  return (
-                  <div>
+                  <div key={i}>
                     <br/>
                     <TeamProjectCard teamProject={{title:teamProject.title}} codeSourcesList={teamProject.codeSourcesList} sourceLogo={this.props.sourceControlLogo}/>
                   </div>

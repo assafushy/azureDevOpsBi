@@ -13,8 +13,8 @@ export default class MainBar extends Component {
       <div>
          <AppBar position="static">
           <Toolbar>
-            <Grid container spacing={12}>
-              <Grid sm={3}>
+            <Grid container spacing={8}>
+              <Grid item sm={3}>
                 <IconButton onClick={this.props.toggleMenu} color="inherit" aria-label="Menu">
                   <MenuIcon />
                 </IconButton>
@@ -22,7 +22,7 @@ export default class MainBar extends Component {
                 {this.props.pageName}
                 </Typography>
               </Grid>
-              <Grid sm={9}>
+              <Grid item sm={5}>
                 <TopLevelFilterSet globalData={this.props.globalData}/>
               </Grid>
             </Grid>

@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import GitIcon from '../../svgCustomIcons/git.svg'

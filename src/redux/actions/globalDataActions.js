@@ -12,12 +12,12 @@ export function fetchAllServerProjects(){
     return (dispatch)=>{  
       return req.then((data)=>{
         projectData=data.data.value;
-       dispatch({type:C.FETCH_PROJECTS,payload:data.data})     
-    ;}).then(()=>{
+        dispatch({type:C.FETCH_PROJECTS,payload:data.data})     
+    ;})
+    .then(()=>{
       fetchAllGitReposetories(projectData);
       fetchAllTFVCReposetories(projectData);
-      fetchSrcContorlTrendChartData();
-
+      //store.dispatch(fetchSrcContorlTrendChartData());
     })
   }//dispatch
 }
