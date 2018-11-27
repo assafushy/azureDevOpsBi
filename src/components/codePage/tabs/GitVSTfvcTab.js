@@ -14,17 +14,14 @@ export default class GitVSTfvcTab extends Component {
   
   teamProjectDataFactory(teamProjectArray={value:[]},repoArray=[],type='git'){
     let mergedData=[];
-
     if(teamProjectArray.value !== undefined){
       teamProjectArray.value.forEach(teamProject => {
        let project = {title:teamProject.name,codeSourcesList:[]};
         if(type==='git'){
-            repoArray.forEach(teamRepos=>{
-                teamRepos.forEach(repo=>{
+            repoArray.forEach(repo=>{
                 if(repo.project.id === teamProject.id){
                   project.codeSourcesList.push({title:repo.name,id:repo.id,sourceLogo:GitLogo})
               }})//foreach
-            })//foreach
           if(project.codeSourcesList.length > 0){mergedData.push(project);}
         }else{//TFVC
           repoArray.forEach(teamRepos=>{
@@ -52,7 +49,7 @@ export default class GitVSTfvcTab extends Component {
               <LineChart chartData={this.props.codeData.srcControlTrendChartData}/> 
           </Grid>    
           <Grid item sm={6}>
-            <SourceControlPanel teamProjectData={this.teamProjectDataFactory(this.props.globalData.teamProjectsData,this.props.codeData.gitRepos,'git')}
+            <SourceControlPanel teamProjectData={this.teamProjectDataFactory(this.props.globalData.teamProjectsData,this.props.codeData.gitRepos.value,'git')}
                                 sourceControlType='git'
                                 sumOfRepos={this.props.sumOfGitRepos}
                                 sourceControlLogo={GitLogo}/>

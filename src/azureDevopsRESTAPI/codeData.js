@@ -1,5 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
+import _ from 'lodash';
 
 //GIT---------------------------------------------------------------
   //fetches all Git Repos by teamProjects
@@ -21,34 +22,39 @@ export async function fetchAllGitRepoPushesByTeamProject(RepoData,fromDate=undef
   
   //get all active git repos for project array
 export async function fetchAllActiveGitRepos(teamProjectsList,fromDate=undefined,toDate=undefined) { 
-  console.log(`ran fetchAllActiveGitRepos with dates : ${fromDate} and ${toDate} `);
-  console.log(teamProjectsList)
-  return new Promise((resolve,reject)=>{
-    Promise.all(teamProjectsList.map(async (teamProject)=>{
-      return await fetchAllGitReposByTeamProject(teamProject.id);
-    })).then((resArr)=>{
-      if(fromDate){console.log(resArr)}
-    //gets only for projects with repos - the active Repos
-    Promise.all(resArr.map(async (res,i)=>{
-      let gitRepos= [];
-      if(res.data.count>0){
-        res.data.value.forEach(async (repo,i)=>{
-          fetchAllGitRepoPushesByTeamProject(repo,fromDate,toDate).then((gitPushes)=>{
-            if(gitPushes.data.count>0){
-              gitRepos.push(repo);
-            }//if
-          }) 
-        })//forEach
-        return gitRepos;
-      }//if
-      return [];  
-    })).then((reposList)=>{
-      resolve(reposList);
-    })
-  }).catch((error)=>{
-    console.log(error)
-  });
-  })  
+  
+  let activeReposSum = {"count":0,"value":[]};
+  
+  await Promise.all(teamProjectsList.map(async (teamProject)=>{
+    // console.log(`running for ${JSON.stringify(teamProject)}`);
+    //get all project Repos
+    let req =  await fetchAllGitReposByTeamProject(teamProject.id);
+    let projectGitRepos = req.data;
+    let activeReposArr =[];
+    // console.log(`checking repos ${JSON.stringify(projectGitRepos)}`)
+    if(projectGitRepos.count>0){
+      //iterate project repos and check if active
+      activeReposArr = await Promise.all(projectGitRepos.value.map(async (repo)=>{
+        let req = await fetchAllGitRepoPushesByTeamProject(repo,fromDate,toDate);
+        let pushes = req.data;
+        // console.log(`pushes : ${JSON.stringify(pushes)}`)
+        if(pushes.count > 0){
+          activeReposSum.count += 1
+          activeReposSum.value.push(repo);
+          return repo;
+        }else{
+          return null
+        }
+      })
+      )//Promise.all
+    }else{
+      return null
+    }
+    return activeReposArr;
+      }))
+  console.log(`Sum Repos :`);
+  console.log(activeReposSum);
+  return activeReposSum;
 }//fetchAllActiveGitRepos
   
 
@@ -70,30 +76,26 @@ export async function fetchAllTFVCChangeSetsByTeamProject(teamProjectId,fromDate
 
 //CODE CHARTS---------------------------------------------------------
 export async function getSrcTrendChartsData(teamProjectsList=[]){
-return new Promise((resolve,reject)=>{
 
   let labels =[];
-  let gitActiveReposByMonth = [1,2,3,4,5,6,7,8,9,10,11,12];
+  let gitActiveReposByMonth = [];
   let TFVCActiveReposByMonth = [];
   
-  for (let i = 0; i < 11 ; i++) {
+  for (let i = 0; i <= 11 ; i++) {
     labels[11-i] = moment().subtract(i,'months').format('MMM');
-  }
-  
-  Promise.all(gitActiveReposByMonth.map(async (element,i)=>{
-    return await fetchAllActiveGitRepos(teamProjectsList,
-      moment().subtract(i+1,'months').toISOString(),
-      moment().subtract(i,'months').toISOString());
-    })).then((resArr)=>{
-      gitActiveReposByMonth=resArr;
-    }).then(()=>{
-      console.log(`promise all finished : ${JSON.stringify(gitActiveReposByMonth)}`)
-      //iterate a year before
-      resolve( {
+    let monthActiveRepos = await fetchAllActiveGitRepos(teamProjectsList,
+        moment().subtract(i+1,'months').toISOString(),
+        moment().subtract(i,'months').toISOString());
+    gitActiveReposByMonth[11-i]= monthActiveRepos.count;
+  }//for
+ 
+    
+      
+  return {
         "labels":labels,
         "gitActiveReposByMonth":gitActiveReposByMonth,
-        "TFVCActiveReposByMonth":[23,18,15,15,15,6,17,12,23,12,8,3],
-      }) 
-    })
-  })//returnPromise
+        "TFVCActiveReposByMonth":[0,0,0,0,0,0,0,0,0,0,0,0],
+        }
+     
   }//getChartsData
+  

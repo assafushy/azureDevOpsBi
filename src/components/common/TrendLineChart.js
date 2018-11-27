@@ -9,12 +9,12 @@ function chartData(chartDataObject) {
     datasets: [
       {
         label: 'Git Active Repos',
-        fillColor: 'rgba(220,220,220,0.2)',
-        strokeColor: 'rgba(220,220,220,1)',
-        pointColor: 'rgba(220,220,220,1)',
+        fillColor: 'rgba(255,0,0,0.2)',
+        strokeColor: 'rgba(255,0,0,1)',
+        pointColor: 'rgba(255,0,0,1)',
         pointStrokeColor: '#fff',
         pointHighlightFill: '#fff',
-        pointHighlightStroke: 'rgba(220,220,220,1)',
+        pointHighlightStroke: 'rgba(255,0,0,1)',
         data: chartDataObject.gitActiveReposByMonth,
       },
       {
@@ -59,7 +59,7 @@ class TrendLindeChart extends React.Component {
 
   render() {
     return (
-      <div style={styles.graphContainer}>
+      <div>
         <LineChart data={chartData(this.props.chartData)}
           options={options} height={50}/>
       </div>

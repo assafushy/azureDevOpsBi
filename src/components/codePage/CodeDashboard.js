@@ -32,7 +32,7 @@ class CodeDashboard extends Component {
 
         {this.state.activeTabValue === 0 && <GitVSTfvcTab  globalData={this.props.globalData} 
                                                            codeData={this.props.codeData} 
-                                                           sumOfGitRepos={this.calculateReposCount(this.props.codeData.gitRepos)} 
+                                                           sumOfGitRepos={this.props.codeData.gitRepos.count} 
                                                            sumOfTFVCRepos={this.calculateReposCount(this.props.codeData.tfvcRepos)}/>}
         {this.state.activeTabValue === 1 && <h1 align={'center'}>Under Construction</h1>}
 
