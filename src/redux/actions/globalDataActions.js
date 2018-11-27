@@ -17,7 +17,7 @@ export function fetchAllServerProjects(){
     .then(()=>{
       fetchAllGitReposetories(projectData);
       fetchAllTFVCReposetories(projectData);
-      fetchSrcContorlTrendChartData();
+      fetchSrcContorlTrendChartData(projectData);
     })
   }//dispatch
 }
