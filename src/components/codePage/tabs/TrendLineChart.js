@@ -9,6 +9,8 @@ function chartData(chartDataObject) {
     datasets: [
       {
         label: 'Git Active Repos',
+        backgroundColor: 'rgba(220,0,0,0.4)',
+        borderColor: 'rgba(220,0,0,1)',
         fillColor: 'rgba(255,0,0,0.2)',
         strokeColor: 'rgba(255,0,0,1)',
         pointColor: 'rgba(255,0,0,1)',
@@ -19,6 +21,8 @@ function chartData(chartDataObject) {
       },
       {
         label: 'TFVC Active Repos',
+        backgroundColor: 'rgba(165,45,202,0.4)',
+        borderColor: 'rgba(165,45,202,1)',
         fillColor: 'rgba(151,187,205,0.2)',
         strokeColor: 'rgba(151,187,205,1)',
         pointColor: 'rgba(151,187,205,1)',

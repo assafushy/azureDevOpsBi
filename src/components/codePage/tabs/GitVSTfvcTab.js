@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import SourceControlPanel from './SourceControlPanel';
-import LineChart from '../../common/TrendLineChart';
+import LineChart from './TrendLineChart';
 import _ from 'lodash';
 import TfvcLogo from '../../../imgs/TfvcLogo.png';  
 import GitLogo from '../../../imgs/GitLogo.png';

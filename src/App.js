@@ -11,6 +11,16 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import CodeDashboard from './components/codePage/CodeDashboard';
 import CodeIcon from '@material-ui/icons/Code';
+import {setSelectedProjects} from '../src/redux/actions/globalDataActions'
+
+import Button from '@material-ui/core/Button';
+import {Autorenew} from '../src/imgs/icons/autorenew.svg';
+
+const fabStyle = {
+  bottom: 20,
+  right: 10,
+  position: 'fixed'
+};
 
 class App extends Component {
 
@@ -52,6 +62,13 @@ class App extends Component {
           </div>
         </Drawer>
         <CodeDashboard globalData={this.props.globalData} codeData={this.props.codeData}/>
+        <Button 
+          style={fabStyle}
+          onClick={()=>{setSelectedProjects()}}  
+          variant="fab" 
+          color="primary" 
+          aria-label="Add"/>
+        
       </div>
     );
   }

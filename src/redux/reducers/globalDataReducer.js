@@ -13,7 +13,7 @@ export default (state={
         case C.FETCH_PROJECTS:
             return{...state,teamProjectsData:action.payload}
         case C.SELECT_PROJECT:
-            return{...state,teamProjectsData:{...state.teamProjectsData,value:action.payload}}
+            return{...state,selectedTeamProject:{...state.teamProjectsData,value:action.payload}}
         default:
             return state;
             
