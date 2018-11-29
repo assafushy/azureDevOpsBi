@@ -19,8 +19,8 @@ class CodeDashboard extends Component {
     return (
       <div>
         <Tabs
-            value={this.state.activeTabValua}
-            onChange={(event,value)=>{this.setState({activeTabValua:value})}}
+            value={this.state.activeTabValue}
+            onChange={(event,value)=>{this.setState({activeTabValue:value})}}
             scrollable
             scrollButtons="on"
             indicatorColor="primary"

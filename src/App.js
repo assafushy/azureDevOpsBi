@@ -14,7 +14,7 @@ import CodeIcon from '@material-ui/icons/Code';
 import {setSelectedProjects} from '../src/redux/actions/globalDataActions'
 
 import Button from '@material-ui/core/Button';
-import {Autorenew} from '../src/imgs/icons/autorenew.svg';
+import CachedIcon from '@material-ui/icons/Cached';
 
 const fabStyle = {
   bottom: 20,
@@ -67,7 +67,9 @@ class App extends Component {
           onClick={()=>{setSelectedProjects()}}  
           variant="fab" 
           color="primary" 
-          aria-label="Add"/>
+          aria-label="Add">
+          <CachedIcon/>
+        </Button>
         
       </div>
     );

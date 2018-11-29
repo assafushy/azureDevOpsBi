@@ -13,7 +13,7 @@ export default class componentName extends Component {
       <div>
         <Grid container spacing={8}>
           <Grid item sm={4}>
-            <SelectBox title="Collections Filter" dataList={(this.props.globalData.teamProjectsData.value)?this.props.globalData.teamProjectsData:{value:[{name:'Fetching data'}]}} />
+            <SelectBox title="Collections Filter" dataList={(this.props.globalData.collectionData.value)?this.props.globalData.teamProjectsData:{value:[{name:'Fetching data'}]}} />
           </Grid>
           <Grid item sm={4}>
             <SelectBox title="Team Projects FIlter" dataList={(this.props.globalData.teamProjectsData.value)?this.props.globalData.teamProjectsData:{value:[{name:'Fetching data'}]}}/>
