@@ -1,4 +1,4 @@
-import C from '../configFiles/constants.json'
+import Config from '../configFiles/config';
 import axios from 'axios';
 import moment from 'moment';
 import _ from 'lodash';
@@ -6,7 +6,7 @@ import _ from 'lodash';
 //GIT---------------------------------------------------------------
   //fetches all Git Repos by teamProjects
 export async function fetchAllGitReposByTeamProject(teamProjectId) { 
-  return await axios.get(`${C.BASE_URL}/${teamProjectId}/_apis/git/repositories?api-version=4.1`);
+  return await axios.get(`${Config.BASE_URL}/${teamProjectId}/_apis/git/repositories?api-version=4.1`);
 }//fetchAllGitReposByTeamProject
  
   //fetches all Git pushes to a repo in dates
@@ -15,7 +15,7 @@ export async function fetchAllGitRepoPushesByTeamProject(RepoData,fromDate=undef
   if(!fromDate){fromDate = moment().subtract(1,'months').toISOString();}
   if(!toDate){toDate = moment().toISOString();}  
   //https://assafushy.visualstudio.com/0cc08e1d-c1c7-47ef-9d20-298e9764f26f/_apis/git/repositories/4bd4d6c4-462f-4f3f-8458-8366f0bf3501/pushes?searchCriteria.toDate=2018-11-22T17:53:41.726Z&searchCriteria.fromDate=2016-01-22T17:53:41.726Z
-  return await axios.get(`${C.BASE_URL}/${RepoData.project.id}/_apis/git/repositories/${RepoData.id}/pushes?searchCriteria.toDate=${toDate}&searchCriteria.fromDate=${fromDate}`);
+  return await axios.get(`${Config.BASE_URL}/${RepoData.project.id}/_apis/git/repositories/${RepoData.id}/pushes?searchCriteria.toDate=${toDate}&searchCriteria.fromDate=${fromDate}`);
 }//fetchAllGitRepoPushesByTeamProject
   
   //get all active git repos for project array
@@ -59,7 +59,7 @@ export async function fetchAllActiveGitRepos(teamProjectsList,fromDate=undefined
 
  //fetches all TFVC Items by teamProjects
 export function fetchAllTFVCReposByTeamProject(teamProjectId) { 
-  return axios.get(`${C.BASE_URL}/${teamProjectId}/_apis/tfvc/items`);
+  return axios.get(`${Config.BASE_URL}/${teamProjectId}/_apis/tfvc/items`);
 }//getProjectList
 
   //fetches all TFVC Items by teamProjects
@@ -68,9 +68,8 @@ export async function fetchAllTFVCChangeSetsByTeamProject(teamProjectId,fromDate
   if(!fromDate){fromDate = moment().subtract(1,'months').toISOString();}
   if(!toDate){toDate = moment().toISOString();}  
   //https://assafushy.visualstudio.com/66933a67-49a2-4e7b-8577-744c6c0e4911/_apis/tfvc/changesets?searchCriteria.fromDate=2018-11-21T13:19:31.153Z&searchCriteria.toDate=2018-11-21T13:19:31.153Z
-  return axios.get(`${C.BASE_URL}/${teamProjectId}/_apis/tfvc/changesets?searchCriteria.fromDate=${fromDate}&searchCriteria.toDate=${toDate}`);
+  return axios.get(`${Config.BASE_URL}/${teamProjectId}/_apis/tfvc/changesets?searchCriteria.fromDate=${fromDate}&searchCriteria.toDate=${toDate}`);
 }//getProjectList
-
 
   //get all active TFVC repos for project array
 export async function fetchAllActiveTFVCRepos(teamProjectsList,fromDate=undefined,toDate=undefined) { 
@@ -105,7 +104,6 @@ export async function fetchAllActiveTFVCRepos(teamProjectsList,fromDate=undefine
   console.log(activeReposSum);
   return activeReposSum;
 }//fetchAllActiveGitRepos
-
 
 //CODE CHARTS---------------------------------------------------------
   //gets the data for the trend chart returns
