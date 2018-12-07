@@ -1,5 +1,3 @@
-var _ = require('lodash');
-
 //default config object
 var config = {
     dev:'development',

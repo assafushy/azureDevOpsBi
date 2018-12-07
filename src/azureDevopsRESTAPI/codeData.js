@@ -1,7 +1,6 @@
 import Config from '../configFiles/config';
 import axios from 'axios';
 import moment from 'moment';
-import _ from 'lodash';
 
 //GIT---------------------------------------------------------------
   //fetches all Git Repos by teamProjects
@@ -81,7 +80,7 @@ export async function fetchAllActiveTFVCRepos(teamProjectsList,fromDate=undefine
     //get all project Repos
     let req =  await fetchAllTFVCReposByTeamProject(teamProject.id);
     let projectRepos = req.data;
-    let activeReposArr =[];
+   
     console.log(`checking repos ${JSON.stringify(projectRepos)}`)
     if(projectRepos.count>0){
       //iterate project repos and check if active
@@ -98,7 +97,6 @@ export async function fetchAllActiveTFVCRepos(teamProjectsList,fromDate=undefine
     }else{
       return null
     }
-    return activeReposArr;
       }))
   console.log(`Sum Repos :`);
   console.log(activeReposSum);

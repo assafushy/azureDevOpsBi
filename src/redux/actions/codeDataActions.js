@@ -1,6 +1,6 @@
 import C from '../../configFiles/constants.json';
-import {fetchAllGitReposByTeamProject,fetchAllTFVCReposByTeamProject,
-  fetchAllTFVCChangeSetsByTeamProject,fetchAllGitRepoPushesByTeamProject,
+import {fetchAllTFVCReposByTeamProject,
+  fetchAllTFVCChangeSetsByTeamProject,
   getSrcTrendChartsData,fetchAllActiveGitRepos} from '../../azureDevopsRESTAPI/codeData';
 import store from '../store';
 

@@ -4,9 +4,10 @@ import {getProjectList} from '../../azureDevopsRESTAPI/projectData';
 import {fetchAllGitReposetories,fetchAllTFVCReposetories,fetchSrcContorlTrendChartData} from './codeDataActions';
 
 import _ from 'lodash';
-import { updateLocale } from 'moment';
+
 
 export function fetchAllServerProjects(){   
+  // eslint-disable-next-line 
   let projectData=[];
   let selectedProjects;
   // store.dispatch(isLoading(true));
@@ -22,6 +23,7 @@ export function fetchAllServerProjects(){
         if(teamProject.selected === undefined || teamProject.selected === true ){
           return teamProject;
         }
+        return false;
       })//filter
       console.log(`selected is: ${selectedProjects}`);
       store.dispatch({type:C.SELECT_PROJECT,payload:selectedProjects});
@@ -62,6 +64,7 @@ export function setSelectedProjects(){
     if(teamProject.selected === undefined || teamProject.selected === true ){
       return teamProject;
     }
+    return false;
   })//filter
   console.log(`selected is: ${selectedProjects}`);
   store.dispatch({type:C.SELECT_PROJECT,payload:selectedProjects});

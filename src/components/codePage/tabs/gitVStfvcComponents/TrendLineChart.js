@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {Line as LineChart} from 'react-chartjs-2';
 
@@ -51,12 +50,6 @@ const options = {
   datasetStrokeWidth: 2,
   datasetFill: true,
   legendTemplate: '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].strokeColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-}
-
-const styles = {
-  graphContainer: {
-    padding: '15px', 
-  }
 }
 
 class TrendLindeChart extends React.Component {
