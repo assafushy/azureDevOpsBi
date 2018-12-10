@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import {bindActionCreators} from 'redux';
 import {connect,} from 'react-redux';
 import {fetchAllServerProjects} from './redux/actions/globalDataActions';
+import {setSelectedProjects} from '../src/redux/actions/globalDataActions';
 
 import MainBar from './components/appBar/MainBar';
 import Drawer from '@material-ui/core/Drawer';
+import CodeDashboard from './components/codePage/CodeDashboard';
+
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import CodeDashboard from './components/codePage/CodeDashboard';
 import CodeIcon from '@material-ui/icons/Code';
-import {setSelectedProjects} from '../src/redux/actions/globalDataActions'
-
 import Button from '@material-ui/core/Button';
 import CachedIcon from '@material-ui/icons/Cached';
 
@@ -33,14 +33,13 @@ class App extends Component {
 
   componentDidMount(){
     this.props.fetchAllServerProjects();
-  }
+  }//componentDidMount
 
   toggleDrawer(){
     (this.state.toggleDrawerMenu)?
     this.setState({"toggleDrawerMenu":false}):
     this.setState({"toggleDrawerMenu":true});
   }//toggleDrawer
-
 
   render() {
     return (
@@ -73,8 +72,9 @@ class App extends Component {
         
       </div>
     );
-  }
-}
+  }//render
+
+}//class
 
 function mapStateToProps(state){
   return{

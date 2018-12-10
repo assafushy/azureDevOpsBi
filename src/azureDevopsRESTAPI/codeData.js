@@ -10,11 +10,18 @@ export async function fetchAllGitReposByTeamProject(teamProjectId) {
  
   //fetches all Git pushes to a repo in dates
 export async function fetchAllGitRepoPushesByTeamProject(RepoData,fromDate=undefined,toDate=undefined) { 
+  let res;
   //Default values for date - one month ago
   if(!fromDate){fromDate = moment().subtract(1,'months').toISOString();}
   if(!toDate){toDate = moment().toISOString();}  
   //https://assafushy.visualstudio.com/0cc08e1d-c1c7-47ef-9d20-298e9764f26f/_apis/git/repositories/4bd4d6c4-462f-4f3f-8458-8366f0bf3501/pushes?searchCriteria.toDate=2018-11-22T17:53:41.726Z&searchCriteria.fromDate=2016-01-22T17:53:41.726Z
-  return await axios.get(`${Config.BASE_URL}/${RepoData.project.id}/_apis/git/repositories/${RepoData.id}/pushes?searchCriteria.toDate=${toDate}&searchCriteria.fromDate=${fromDate}`);
+  try {
+    res = await axios.get(`${Config.BASE_URL}/${RepoData.project.id}/_apis/git/repositories/${RepoData.id}/pushes?searchCriteria.toDate=${toDate}&searchCriteria.fromDate=${fromDate}`);
+  } catch (error) {
+    console.log(`error :  ${JSON.stringify(error)} happened in ${RepoData.project.id}`);
+    return {};
+  }
+  return res;
 }//fetchAllGitRepoPushesByTeamProject
   
   //get all active git repos for project array
@@ -63,11 +70,18 @@ export function fetchAllTFVCReposByTeamProject(teamProjectId) {
 
   //fetches all TFVC Items by teamProjects
 export async function fetchAllTFVCChangeSetsByTeamProject(teamProjectId,fromDate=undefined,toDate=undefined) { 
+  let res;
   //Default values for date - one month ago
   if(!fromDate){fromDate = moment().subtract(1,'months').toISOString();}
   if(!toDate){toDate = moment().toISOString();}  
   //https://assafushy.visualstudio.com/66933a67-49a2-4e7b-8577-744c6c0e4911/_apis/tfvc/changesets?searchCriteria.fromDate=2018-11-21T13:19:31.153Z&searchCriteria.toDate=2018-11-21T13:19:31.153Z
-  return axios.get(`${Config.BASE_URL}/${teamProjectId}/_apis/tfvc/changesets?searchCriteria.fromDate=${fromDate}&searchCriteria.toDate=${toDate}`);
+  try {
+    res = await axios.get(`${Config.BASE_URL}/${teamProjectId}/_apis/tfvc/changesets?searchCriteria.fromDate=${fromDate}&searchCriteria.toDate=${toDate}`);
+  } catch (error) {
+    console.log(`error :  ${JSON.stringify(error)} happened in ${teamProjectId}`);
+    return {data:{count:0,value:{}}};
+  }
+  return res;
 }//getProjectList
 
   //get all active TFVC repos for project array
