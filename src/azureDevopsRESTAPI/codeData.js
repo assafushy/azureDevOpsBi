@@ -95,7 +95,6 @@ export async function fetchAllActiveTFVCRepos(teamProjectsList,fromDate=undefine
     let req =  await fetchAllTFVCReposByTeamProject(teamProject.id);
     let projectRepos = req.data;
    
-    console.log(`checking repos ${JSON.stringify(projectRepos)}`)
     if(projectRepos.count>0){
       //iterate project repos and check if active
         let req = await fetchAllTFVCChangeSetsByTeamProject(teamProject.id,fromDate,toDate);
@@ -111,9 +110,7 @@ export async function fetchAllActiveTFVCRepos(teamProjectsList,fromDate=undefine
     }else{
       return null
     }
-      }))
-  console.log(`Sum Repos :`);
-  console.log(activeReposSum);
+      }));
   return activeReposSum;
 }//fetchAllActiveGitRepos
 

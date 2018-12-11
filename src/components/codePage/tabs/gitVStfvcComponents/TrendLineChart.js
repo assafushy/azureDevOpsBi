@@ -2,7 +2,6 @@ import React from 'react';
 import {Line as LineChart} from 'react-chartjs-2';
 
 function chartData(chartDataObject) {
-  console.log(`chart data :${JSON.stringify(chartDataObject)}`)
   return {
     labels: chartDataObject.labels,
     datasets: [
