@@ -17,7 +17,6 @@ class CodeDashboard extends Component {
     }
   }//constructor
   
-
   render() {
     return (
       <div>
@@ -38,7 +37,8 @@ class CodeDashboard extends Component {
                                                            codeData={this.props.codeData} 
                                                            sumOfGitRepos={this.props.codeData.gitRepos.count} 
                                                            sumOfTFVCRepos={this.calculateReposCount(this.props.codeData.tfvcRepos)}/>}
-        {this.state.activeTabValue === 1 && <BuildStatsTab buildData ={this.props.buildData}/>}
+        {this.state.activeTabValue === 1 && <BuildStatsTab  buildData ={this.props.buildData}
+                                                            repoData={this.props.codeData.gitRepos}/>}
         {this.state.activeTabValue === 2 && <h1 align={'center'}>Under Construction</h1>}
 
       </div>

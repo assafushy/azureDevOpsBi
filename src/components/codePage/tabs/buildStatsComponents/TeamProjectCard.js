@@ -7,8 +7,8 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 
-import GitLogo from '../../../../imgs/GitLogo.png';
 import BuldByRepoTable from './BuildByRepoTable';
+import BuildPieChart from './BuildPieChart';
 
 const styles = {
   card: {
@@ -21,10 +21,17 @@ const styles = {
 };
 
 class TeamProjectCard extends Component { 
+    
+calculateBuildGraphData(totalNum,BuildNum,ciNum){
   
+  let noBuild = totalNum - BuildNum;
+  let noCi = BuildNum - ciNum;
+  
+  return[noBuild,noCi,ciNum];
+}//calculateBuildGraphData
+
   render() {
     const { classes } = this.props;
-    
     return (
       <div>
         <Card styles={styles.card}>
@@ -33,7 +40,14 @@ class TeamProjectCard extends Component {
               {this.props.data.name}
             </Typography>
             <Grid container spacing={12}>
-        
+              <Grid item sm={6}/>
+              <Grid item sm={6}>
+              <BuildPieChart chartData={this.calculateBuildGraphData(
+                this.props.data.repoCount,
+                this.props.data.count,
+                this.props.data.CICount
+              )}/>
+              </Grid>
               <Grid item sm={12}>
                 <BuldByRepoTable data={this.props.data.repoList}/>
               </Grid>

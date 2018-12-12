@@ -50,7 +50,22 @@ class BuildByRepoTable extends Component {
     }else{
       return "NOT GOOD!";
     }//if
-  }
+  }//statusCalculator
+
+  triggerBranchesToString(buildDefList){
+    let triggetBranchList = '';
+    console.log(buildDefList);
+    buildDefList.map((build)=>{
+      if(build.triggers){
+        build.triggers.map((trigger)=>{
+          trigger.branchFilters.map((branch)=>{
+            triggetBranchList += branch + ' ';
+          });
+        });
+      }//if
+    });
+    return triggetBranchList;
+  }//triggerBranchesToString
 
   render() {
     const { classes } = this.props;
@@ -63,7 +78,8 @@ class BuildByRepoTable extends Component {
             <CustomTableCell>Repo Name</CustomTableCell>
             <CustomTableCell numeric>Number Of Builds</CustomTableCell>
             <CustomTableCell numeric>Number Of CI Builds</CustomTableCell>
-            <CustomTableCell numeric>Status</CustomTableCell>
+            <CustomTableCell >Trigger Branches</CustomTableCell>
+            <CustomTableCell >Status</CustomTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -82,7 +98,8 @@ class BuildByRepoTable extends Component {
                 </CustomTableCell>
                 <CustomTableCell numeric>{repo.count}</CustomTableCell>
                 <CustomTableCell numeric>{repo.CICount}</CustomTableCell>
-                <CustomTableCell numeric>{this.statusCalculator(repo.count,repo.CICount)}</CustomTableCell>
+                <CustomTableCell>{this.triggerBranchesToString(repo.buildDefentionList)}</CustomTableCell>
+                <CustomTableCell>{this.statusCalculator(repo.count,repo.CICount)}</CustomTableCell>
               </TableRow>)
           })}
         </TableBody>

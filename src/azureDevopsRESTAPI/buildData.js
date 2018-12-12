@@ -16,30 +16,19 @@ export async function fetchAllBuildDefinitionsForGitRepo(RepoData) {
   return res;
 }//fetchAllBuildDefinitionsForGitRepo
     
-
-// [{id:111,name:'project name',count:1,
-//                               repoList:[
-//                                 {id:"2837gdhs-sdb2",name:'repo name',count:3,CICount:1,
-//                                   buildDefentionList:[]
-//                                 },{id:"2837gdhs-sdb2",name:'repo name',count:3,CICount:0,
-//                                 buildDefentionList:[]
-//                               },{id:"2837gdhs-sdb2",name:'repo name',count:0,CICount:0,
-//                               buildDefentionList:[]
-//                             }]
-//                             }]
-
 //get all active git repos build defenitions for project array
 export async function fetchAllActiveGitReposBuildDefenitions(teamProjectsList,gitReposList) { 
 
-  let buildDefentionList = {"count":0,"value":[]};
+  let buildDefentionList = {count:0,CICount:0,value:[]};
   
   await Promise.all(teamProjectsList.map(async (teamProject)=>{
-    let projectBuildObject = {id:teamProject.id,name:teamProject.name,count:0,repoList:[]}
+    let projectBuildObject = {id:teamProject.id,name:teamProject.name,repoCount:0,count:0,CICount:0,repoList:[]}
     //filter all project Repos
     let projectRepoList = _.filter(gitReposList,repo=>repo.project.id == teamProject.id);
     //skips projects with no active repos
     if(projectRepoList.length > 0){
       let finalRepoList = await Promise.all(projectRepoList.map(async (repo)=>{
+          projectBuildObject.repoCount += 1;
           let repoData = {id:repo.id,name:repo.name,count:0,CICount:0,buildDefentionList:[]};
           let req = await fetchAllBuildDefinitionsForGitRepo(repo);
           let repoBuildDefenitions = req.data;
@@ -54,8 +43,16 @@ export async function fetchAllActiveGitReposBuildDefenitions(teamProjectsList,gi
             repoData.buildDefentionList = repoBuildDefenitions.value;
 
             await Promise.all(repoData.buildDefentionList.map(async (buildDefenetion)=>{
+              let isCI = false;
               await Promise.all(buildDefenetion.triggers.map((trigger)=>{
-                if(trigger.triggerType === "continuousIntegration"){repoData.CICount +=1}
+                if(trigger.triggerType === "continuousIntegration"){
+                  if(!isCI){
+                    repoData.CICount += 1;
+                    projectBuildObject.CICount += 1;
+                    buildDefentionList.CICount += 1;
+                    isCI = true;
+                  }//if
+                }//if
               }))//Promise.all
             }))//Promise.all
           }else{

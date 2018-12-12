@@ -2,18 +2,7 @@ import React, { Component } from 'react';
 import Grid from '@material-ui/core/Grid';
 import _ from 'lodash';
 import TeamProjectCard from './buildStatsComponents/TeamProjectCard';
-
-
-let sampleTeamProjectData = [{id:111,name:'project name',count:1,
-                              repoList:[
-                                {id:"2837gdhs-sdb2",name:'repo name',count:3,CICount:1,
-                                  buildDefentionList:[]
-                                },{id:"2837gdhs-sdb2",name:'repo name',count:3,CICount:0,
-                                buildDefentionList:[]
-                              },{id:"2837gdhs-sdb2",name:'repo name',count:0,CICount:0,
-                              buildDefentionList:[]
-                            }]
-                            }]
+import BuildPieChart from './buildStatsComponents/BuildPieChart';
 
 export default class BuildStatsTab extends Component {
   
@@ -45,13 +34,22 @@ export default class BuildStatsTab extends Component {
     return mergedData;
   }//teamProjectDataFactory
 
+  calculateBuildGraphData(totalNum,BuildNum,ciNum){
+    let noBuild = totalNum - BuildNum;
+    let noCi = BuildNum - ciNum;
+    return[noBuild,noCi,ciNum];
+  }//calculateBuildGraphData
+
   render() {
     return (
       <div>
         <br/>
         <Grid container spacing={12} > 
           <Grid item sm={12}>
-              <h1 align="center">a placeholder for summery graph</h1>
+            <BuildPieChart chartData={this.calculateBuildGraphData(
+              this.props.repoData.count,
+              this.props.buildData.buildDefentionsByGitRepos.count,
+              this.props.buildData.buildDefentionsByGitRepos.CICount)}/>
           </Grid> 
           <Grid item sm={12}>
           { (this.props.buildData.buildDefentionsByGitRepos.value)?
