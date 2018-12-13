@@ -1,14 +1,13 @@
 import C from '../../configFiles/constants.json';
-import {fetchAllTFVCReposByTeamProject,
-  fetchAllTFVCChangeSetsByTeamProject,
-  getSrcTrendChartsData,fetchAllActiveGitRepos} from '../../azureDevopsRESTAPI/codeData';
+import {fetchAllActiveGitReposBuildDefenitions} from '../../azureDevopsRESTAPI/buildData';
 import store from '../store';
 
 
-export async function fetchAllGitReposetories(teamProjectsList=[]){   
+export async function fetchAllBuildDefinitions(teamProjectsList=[]){   
   return new Promise((resolve,reject)=>{
-    fetchAllActiveGitRepos(teamProjectsList).then((reposList)=>{
-        store.dispatch({type:C.FETCH_ALL_PROJECTS__GIT_REPOS,payload:reposList});
+    let repoList = store.getState().codeData.gitRepos.value;
+    fetchAllActiveGitReposBuildDefenitions(teamProjectsList,repoList).then((buildList)=>{
+        store.dispatch({type:C.FETCH_BUILD_DEFENITIONS_GIT_REPOS,payload:buildList});
         resolve(true);
     })//.then
   })//Ptomise  
