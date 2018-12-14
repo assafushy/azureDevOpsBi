@@ -2,7 +2,7 @@ import store from '../store';
 import C from '../../configFiles/constants.json';
 import {getProjectList} from '../../azureDevopsRESTAPI/projectData';
 import {fetchAllGitReposetories,fetchAllTFVCReposetories,fetchSrcContorlTrendChartData} from './codeDataActions';
-import {} from './buildDefenitionsDataActions';
+import {fetchAllBuildDefinitions} from './buildDefenitionsDataActions';
 
 import _ from 'lodash';
 
@@ -82,9 +82,10 @@ export async function UpdateGlobalState(selectedProjects){
 export async function fetchSrcData(selectedProjects){
   await fetchAllGitReposetories(selectedProjects);
   await fetchAllTFVCReposetories(selectedProjects);
-  await fetchSrcContorlTrendChartData(selectedProjects);
+  fetchSrcContorlTrendChartData(selectedProjects);
 }//fetchSrcData
 
 export async function fetchBuildData(selectedProjects){
- console.log("fetching build data");
+  fetchAllBuildDefinitions(selectedProjects);
+  console.log("fetching build data");
 }//fetchBuildData

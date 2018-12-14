@@ -92,11 +92,8 @@ class App extends Component {
             {drawer}
           </div>
         </Drawer>
-        <CodeDashboard
-          globalData={this.props.globalData}
-          codeData={this.props.codeData}
-        />
-        <Button
+        <CodeDashboard globalData={this.props.globalData} codeData={this.props.codeData} buildData={this.props.buildData}/>
+        <Button 
           style={fabStyle}
           onClick={() => {
             setSelectedProjects();
@@ -112,12 +109,13 @@ class App extends Component {
   } //render
 } //class
 
-function mapStateToProps(state) {
-  return {
-    globalData: state.globalData,
-    codeData: state.codeData
-  };
-} //mapStateToProps
+function mapStateToProps(state){
+  return{
+    globalData:state.globalData,
+    codeData:state.codeData,
+    buildData:state.buildData
+  }
+}//mapStateToProps
 
 function matchDispachToProps(dispatch) {
   return bindActionCreators(
