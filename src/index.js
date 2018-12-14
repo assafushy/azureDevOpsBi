@@ -9,11 +9,6 @@ import config from './configFiles/config.js';
 
 //set defualt access tolen for all requests
 axios.defaults['auth'] = {"username":'',"password":config.AccessToken};
-console.log(process.env.REACT_APP_APIKEY);
-console.log(`process.env.BASE_URL: ${process.env.BASE_URL}`);
-console.log(`process.env.AccessToken: ${process.env.AccessToken}`);
-console.log(`the env var is:`);
-console.log(JSON.stringify(process.env));
 
 ReactDOM.render(<Provider store={store}>
 <App/></Provider>, document.getElementById('root'));
