@@ -8,6 +8,7 @@ import WorkMetricsTab from "./tabs/WorkMetricsTab";
 import GitIcon from "../../svgCustomIcons/git.svg";
 import BuildIcon from "../../imgs/icons/buildIcon.svg";
 import GitBranchIcon from "../../svgCustomIcons/git-branch.svg";
+import WorkMetricsIcon from "../../svgCustomIcons/calendar-edit.svg";
 
 class CodeDashboard extends Component {
   constructor() {
@@ -47,7 +48,7 @@ class CodeDashboard extends Component {
           />
           <Tab
             label="Work"
-            icon={<img src={GitBranchIcon} alt="Git branch logo" />}
+            icon={<img src={WorkMetricsIcon} alt="Git branch logo" />}
             value={3}
           />
         </Tabs>
