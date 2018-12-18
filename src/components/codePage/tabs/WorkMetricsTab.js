@@ -18,7 +18,7 @@ export default class WorkMetricsTab extends Component {
         <Grid container spacing={12}>
           <Grid item xs={12} sm={10}>
             <RepoMetricsExpansionPanel
-              teamProject={{ title: "AllSoftware" }}
+              teamProject={{ title: "Summary" }}
               defaultExpanded
             />
             {this.props.globalData.teamProjectsData.value.map(
@@ -27,7 +27,7 @@ export default class WorkMetricsTab extends Component {
                   <div key={i}>
                     <br />
                     <RepoMetricsExpansionPanel
-                      teamProject={{ title: teamProject.name }}
+                      teamProject={{ title: "Team: " + teamProject.name }}
                       onChange={{ onChange: this.handleChange(i) }}
                     />
                   </div>

@@ -27,7 +27,7 @@ class RepoMetricsExpansionPanel extends Component {
           onChange={this.props.onChange}
         >
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography>Team: {this.props.teamProject.title}</Typography>
+            <Typography>{this.props.teamProject.title}</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <Card className={this.props.classes.card}>
