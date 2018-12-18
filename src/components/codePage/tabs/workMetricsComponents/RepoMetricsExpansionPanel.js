@@ -17,7 +17,7 @@ const styles = {
   }
 };
 
-class RepoMetricsExpansionPanel extends Component {
+class TeamMetricsExpansionPanel extends Component {
   render() {
     return (
       <div>
@@ -55,4 +55,4 @@ class RepoMetricsExpansionPanel extends Component {
   }
 }
 
-export default withStyles(styles)(RepoMetricsExpansionPanel);
+export default withStyles(styles)(TeamMetricsExpansionPanel);

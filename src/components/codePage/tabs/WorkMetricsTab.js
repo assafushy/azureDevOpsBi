@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RepoMetricsExpansionPanel from "./workMetricsComponents/RepoMetricsExpansionPanel";
+import TeamMetricsExpansionPanel from "./workMetricsComponents/RepoMetricsExpansionPanel";
 import Grid from "@material-ui/core/Grid";
 
 export default class WorkMetricsTab extends Component {
@@ -17,7 +17,7 @@ export default class WorkMetricsTab extends Component {
       <div>
         <Grid container spacing={12}>
           <Grid item xs={12} sm={10}>
-            <RepoMetricsExpansionPanel
+            <TeamMetricsExpansionPanel
               teamProject={{ title: "Summary" }}
               defaultExpanded
             />
@@ -26,7 +26,7 @@ export default class WorkMetricsTab extends Component {
                 return (
                   <div key={i}>
                     <br />
-                    <RepoMetricsExpansionPanel
+                    <TeamMetricsExpansionPanel
                       teamProject={{ title: "Team: " + teamProject.name }}
                       onChange={{ onChange: this.handleChange(i) }}
                     />
