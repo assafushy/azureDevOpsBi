@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TeamMetricsExpansionPanel from "./workMetricsComponents/RepoMetricsExpansionPanel";
+import TeamMetricsExpansionPanel from "./workMetricsComponents/TeamMetricsExpansionPanel";
 import Grid from "@material-ui/core/Grid";
 
 export default class WorkMetricsTab extends Component {
