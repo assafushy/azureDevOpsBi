@@ -5,8 +5,8 @@ services:
     restart: always
     build: .\backEnd
     volumes:
-    - .:/usr/src/app
-    - /usr/src/app/node_modules
+    - ./backend:/usr/src/app
+    - ./backend/node_modules:/usr/src/app/node_modules
     ports: 
       - "4000:4000"
     links: 
@@ -21,6 +21,9 @@ services:
     container_name: frontEnd
     restart: always
     build: .\frontEnd
+    volumes:
+    - ./frontEnd:/usr/src/app
+    - ./frontEnd/node_modules:/usr/src/app/node_modules
     ports: 
       - "3000:3000"
     links: 

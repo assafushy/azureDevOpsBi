@@ -4,7 +4,7 @@ node_js:
 env:
  NODE_ENV=TEST
 install:
-  npm install
+  ./frontEnd/npm install
 script:
-   npm test
-   npm run build
+  ./frontEnd/npm test
+  ./frontEnd/npm run build
