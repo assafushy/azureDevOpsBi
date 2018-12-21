@@ -3,7 +3,7 @@ node_js:
   - "stable"
 env:
  NODE_ENV=TEST
-before_script: cd frontEnd
+before_install: cd frontEnd
 install:
   npm install
 script:
