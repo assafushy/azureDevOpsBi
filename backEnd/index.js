@@ -9,4 +9,4 @@ app.use(cors());
 // const viewsRouter = require('./api/views');
 // app.use('/views',viewsRouter);
 
-app.listen(4000, () => console.log('testing volume on on http://localhost:4000'));
+app.listen(4000, () => console.log('trying nodemon volume on on http://localhost:4000'));
