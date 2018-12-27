@@ -1,0 +1,77 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Azuredevops BI API
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /viewFilter:
+    get:
+      description: "This endpoint return all the saved viewFilters in the database"
+      operationId: "getAllViewFilters"
+      responses:
+        200:
+          description: "an array of viewFilters"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ViewFilter"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+#----------------------------------------------------------------  
+  ViewFilter:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        description: " a uniqe id for the document"
+      createdBy:
+        type: "string"
+        description: "name of creator"
+      changeDates:
+        type: "array"
+        description: "list of all dates that the document was updated"
+        items:
+          $ref: "#/definitions/createDateHistoryItem"
+      projectList:
+        type: "array"
+        description: "the listof project and their properties"
+        items:
+          $ref: "#/definitions/projectItem"
+      isActive:
+        type: "boolean"
+        description: "specifiy is the document available to the users"
+#----------------------------------------------------------------  
+  createDateHistoryItem:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+        description: "a string repesentation of a javascript object"
+      changedBy:
+        type: "string"
+        description: "the user name that made the changes"
+#----------------------------------------------------------------  
+  projectItem:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "the project id in azureDevops server"
+      
+  
