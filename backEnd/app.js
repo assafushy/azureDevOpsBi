@@ -20,9 +20,10 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   var port = process.env.PORT || 10010;
   
   mongoose.Promise = bluebird;
-  mongoose.connect('mongodb://localhost:27017');
+  mongoose.connect('mongodb://localhost:27017/azuredevopsbi',{ useNewUrlParser: true });
   mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
-  mongoose.connection.once('open', function(){
+  mongoose.connection.once('open',()=>{
+      console.log("API server is connected to DB!");
       app.listen(port);
   });
   
