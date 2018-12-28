@@ -5,5 +5,5 @@ COPY package.json /usr/src/app/
 RUN npm install
 COPY . /usr/src/app
 RUN npm install -g nodemon
-EXPOSE 4000
+EXPOSE 10010
 CMD [ "npm","start"]

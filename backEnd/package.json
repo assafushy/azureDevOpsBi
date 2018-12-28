@@ -8,7 +8,9 @@
   "license": "",
   "main": "app.js",
   "dependencies": {
+    "bluebird": "^3.5.3",
     "express": "^4.12.3",
+    "mongoose": "^5.4.1",
     "swagger-express-mw": "^0.1.0"
   },
   "devDependencies": {

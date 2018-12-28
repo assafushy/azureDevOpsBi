@@ -9,7 +9,7 @@ services:
     - ./backend:/usr/src/app
     - ./backend/node_modules:/usr/src/app/node_modules
     ports: 
-      - "4000:4000"
+      - "10010:10010"
     links: 
       - mongo
   mongo:

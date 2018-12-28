@@ -20,8 +20,8 @@ produces:
 paths:
   /viewFilter:
     get:
-      description: "This endpoint return all the saved viewFilters in the database"
-      operationId: "getAllViewFilters"
+      description: "Endpoint returns all the saved viewFilters in the database"
+      operationId: "GetAllViewFilters"
       responses:
         200:
           description: "an array of viewFilters"
@@ -29,6 +29,68 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/ViewFilter"
+      x-swagger-router-controller: "GetAllViewFilters"
+#----------------------------------------------------------------------
+    post:
+      description: "Endpoint that adds a new viewFilter to the db"
+      operationId: "AddViewFilter"
+      produces: 
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "newViewFilter"
+        description: "The view filter to add"
+        required: true
+        schema:
+            type: "object"
+            items:
+              $ref: "#/definitions/ViewFilter"
+      responses:
+        200:
+          description: "an updated list of all the view filters including the one added "
+          schema:
+            $ref: "#/definitions/ViewFilter"
+      x-swagger-router-controller: "AddViewFilter"
+#---------------------------------------------------------------------- 
+  /viewFilter/{id}:
+    delete:
+      description: "Endpoint that removes a viewFilter by id to the db"
+      operationId: "DeleteViewFilterById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the view filter to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        204:
+          description: "View filter deleted"
+      x-swagger-router-controller: "DeleteViewFilter" 
+#---------------------------------------------------------------------- 
+    put:
+      description: "Endpoint that updates a viewFilter by id in the db"
+      operationId: "UpdateViewFilterById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the view filter to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "updatedViewFilter"
+        in: "body"
+        description: "The view filter detailes to update"
+        required: true
+        schema: 
+          $ref: "#/definitions/ViewFilter"
+      responses:
+        200:
+          description: "View filter updated"
+        400:
+          description: "Error updating view filters"
+      x-swagger-router-controller: "UpdateViewFilter" 
+#---------------------------------------------------------------------- 
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions

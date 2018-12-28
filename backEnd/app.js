@@ -2,6 +2,9 @@
 
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
+const mongoose = require('mongoose');
+const bluebird = require('bluebird');
+
 module.exports = app; // for testing
 
 var config = {
@@ -15,7 +18,14 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   swaggerExpress.register(app);
 
   var port = process.env.PORT || 10010;
-  app.listen(port);
+  
+  mongoose.Promise = bluebird;
+  mongoose.connect('mongodb://localhost:27017');
+  mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
+  mongoose.connection.once('open', function(){
+      app.listen(port);
+  });
+  
 
   if (swaggerExpress.runner.swagger.paths['/hello']) {
     console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
