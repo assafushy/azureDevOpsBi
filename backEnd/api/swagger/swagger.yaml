@@ -42,9 +42,7 @@ paths:
         description: "The view filter to add"
         required: true
         schema:
-            type: "object"
-            items:
-              $ref: "#/definitions/ViewFilter"
+          $ref: "#/definitions/ViewFilter"
       responses:
         200:
           description: "an updated list of all the view filters including the one added "

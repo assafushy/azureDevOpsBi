@@ -1,7 +1,10 @@
-module.exports = {
-  GetAllViewFilters : GetAllViewFilters
-};
+const ViewFilters = require('../models/viewFilterModel');
 
-function GetAllViewFilters(req,res) {
-    
+module.exports = {
+  GetAllViewFilters:GetAllViewFilters
+}
+
+async function GetAllViewFilters(req,res){
+  let allViewFilters = await ViewFilters.find();
+  res.json(allViewFilters);
 }

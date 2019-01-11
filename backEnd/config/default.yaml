@@ -17,6 +17,15 @@ swagger:
       mockControllersDirs: [ api/mocks ]
       controllersDirs: [ api/controllers ]
 
+    _swagger_params_parser:                    # <= Add this definition
+      name: swagger_params_parser
+      jsonOptions: {}
+      urlencodedOptions:
+        extended: false
+      multerOptions:
+        inMemory: true
+      textOptions:
+        type: "*/*"
     _swagger_validate:
       name: swagger_validator
       validateResponse: true
@@ -25,6 +34,7 @@ swagger:
     swagger_controllers:
       - onError: json_error_handler
       - cors
+      - swagger_params_parser  
       - swagger_security
       - _swagger_validate
       - express_compatibility

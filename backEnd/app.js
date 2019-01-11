@@ -4,6 +4,7 @@ var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
+const cors = require('cors');
 
 module.exports = app; // for testing
 
@@ -13,7 +14,8 @@ var config = {
 
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
-
+  app.use(cors());
+  
   // install middleware
   swaggerExpress.register(app);
 
@@ -23,12 +25,9 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   mongoose.connect('mongodb://localhost:27017/azuredevopsbi',{ useNewUrlParser: true });
   mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
   mongoose.connection.once('open',()=>{
-      console.log("API server is connected to DB!");
-      app.listen(port);
+    console.log(`server is listening on ${port}`);  
+    console.log("API server is connected to DB!");
+    app.listen(port);
   });
-  
 
-  if (swaggerExpress.runner.swagger.paths['/hello']) {
-    console.log('try this:\ncurl http://127.0.0.1:' + port + '/hello?name=Scott');
-  }
 });
