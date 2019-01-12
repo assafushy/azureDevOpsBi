@@ -20,6 +20,8 @@ services:
       - "27017:27017"
   frontend:
     container_name: frontEnd
+    environment:
+    - DOCKER=true
     restart: always
     build: .\frontEnd
     volumes:

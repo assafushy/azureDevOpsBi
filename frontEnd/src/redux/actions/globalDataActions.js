@@ -6,7 +6,6 @@ import {fetchAllBuildDefinitions} from './buildDefenitionsDataActions';
 
 import _ from 'lodash';
 
-
 export function fetchAllServerProjects(){   
   // eslint-disable-next-line 
   let projectData=[];
