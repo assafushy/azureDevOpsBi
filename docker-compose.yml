@@ -2,9 +2,10 @@ version: "2"
 services:
   backend:
     container_name: backEnd
+    environment:
+    - DOCKER=true
     restart: always
     build: .\backEnd
-    command: nodemon --watch index.js
     volumes:
     - ./backend:/usr/src/app
     - ./backend/node_modules:/usr/src/app/node_modules
@@ -15,7 +16,6 @@ services:
   mongo:
     container_name: mongo
     image: mongo
-    
     ports:
       - "27017:27017"
   frontend:

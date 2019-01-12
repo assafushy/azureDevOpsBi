@@ -22,7 +22,9 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   var port = process.env.PORT || 10010;
   
   mongoose.Promise = bluebird;
-  mongoose.connect('mongodb://localhost:27017/azuredevopsbi',{ useNewUrlParser: true });
+  console.log(`container is up with ENV var DOCKER = ${JSON.stringify(process.env.DOCKER)}`);
+  let mongoUrl = (process.env.DOCKER)? 'mongodb://mongo:27017/azuredevopsbi': 'mongodb://localhost:27017/azuredevopsbi';
+  mongoose.connect(mongoUrl,{ useNewUrlParser: true });
   mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
   mongoose.connection.once('open',()=>{
     console.log(`server is listening on ${port}`);  
