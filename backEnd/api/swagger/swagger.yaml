@@ -29,7 +29,7 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/ViewFilter"
-      x-swagger-router-controller: "GetAllViewFilters"
+      x-swagger-router-controller: "viewFilters"
 #----------------------------------------------------------------------
     post:
       description: "Endpoint that adds a new viewFilter to the db"
@@ -48,7 +48,7 @@ paths:
           description: "an updated list of all the view filters including the one added "
           schema:
             $ref: "#/definitions/ViewFilter"
-      x-swagger-router-controller: "AddViewFilter"
+      x-swagger-router-controller: "viewFilters"
 #---------------------------------------------------------------------- 
   /viewFilter/{id}:
     delete:
@@ -64,7 +64,7 @@ paths:
       responses:
         204:
           description: "View filter deleted"
-      x-swagger-router-controller: "DeleteViewFilter" 
+      x-swagger-router-controller: "viewFilters" 
 #---------------------------------------------------------------------- 
     put:
       description: "Endpoint that updates a viewFilter by id in the db"
@@ -87,7 +87,7 @@ paths:
           description: "View filter updated"
         400:
           description: "Error updating view filters"
-      x-swagger-router-controller: "UpdateViewFilter" 
+      x-swagger-router-controller: "viewFilters" 
 #---------------------------------------------------------------------- 
   /swagger:
     x-swagger-pipe: swagger_raw
