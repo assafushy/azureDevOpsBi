@@ -16,6 +16,8 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
+EXPOSE 35729
+
 CMD [ "npm", "start" ]
 
 #docker run -it -p 80:3000/tcp 393cb7bf41dc

@@ -20,7 +20,7 @@
     "supertest": "^1.0.0"
   },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "nodemon --legacy-watch app.js",
     "test": "swagger project test"
   }
 }

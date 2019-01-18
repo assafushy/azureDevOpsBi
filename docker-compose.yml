@@ -29,5 +29,6 @@ services:
     - ./frontEnd/node_modules:/usr/src/app/node_modules
     ports: 
       - "3000:3000"
+      - "35729:35729"
     links: 
       - backend
