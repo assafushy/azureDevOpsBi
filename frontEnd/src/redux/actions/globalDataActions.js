@@ -1,5 +1,6 @@
 import store from '../store';
 import C from '../../configFiles/constants.json';
+import {fetchAllViewFilters,postNewViewFilter} from '../../biRESTAPI/viewFiltersData';
 import {getProjectList} from '../../azureDevopsRESTAPI/projectData';
 import {fetchAllGitReposetories,fetchAllTFVCReposetories,fetchSrcContorlTrendChartData} from './codeDataActions';
 import {fetchAllBuildDefinitions} from './buildDefenitionsDataActions';
@@ -15,7 +16,8 @@ export function fetchAllServerProjects(){
     return (dispatch)=>{  
       return req.then((data)=>{
         projectData=data.data.value;
-        dispatch({type:C.FETCH_PROJECTS,payload:data.data})     
+        dispatch({type:C.FETCH_PROJECTS,payload:data.data})
+        fetchViewFilters();   
     ;})
     .then(()=>{
       let globalData = store.getState().globalData.teamProjectsData.value;
@@ -25,7 +27,6 @@ export function fetchAllServerProjects(){
         }
         return false;
       })//filter
-      console.log(`selected is: ${selectedProjects}`);
       store.dispatch({type:C.SELECT_PROJECT,payload:selectedProjects});
     })
     .then(()=>{
@@ -66,7 +67,6 @@ export function setSelectedProjects(){
     }
     return false;
   })//filter
-  console.log(`selected is: ${selectedProjects}`);
   store.dispatch({type:C.SELECT_PROJECT,payload:selectedProjects});
   UpdateGlobalState(selectedProjects);
 }//fetchAllServerProjects
@@ -88,3 +88,19 @@ export async function fetchBuildData(selectedProjects){
   fetchAllBuildDefinitions(selectedProjects);
   console.log("fetching build data");
 }//fetchBuildData
+
+export async function fetchViewFilters(){
+  let res = await fetchAllViewFilters();
+  // console.log(`viewFilters list : ${JSON.stringify(res.data)}`);
+  let data = [];
+  (res.data)?data=res.data:data=[];
+  store.dispatch({type:C.FETCH_VIEW_FILTERS,payload:data});
+
+}//fetchViewFilters
+
+export async function saveNewViewFilter(newViewFilter){  
+  let res = await postNewViewFilter(newViewFilter);
+  console.log(`post view filter respones:`);
+  console.log(res);
+  fetchViewFilters();
+}//saveNewViewFilter

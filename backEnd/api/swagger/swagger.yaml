@@ -97,9 +97,12 @@ definitions:
   ViewFilter:
     type: "object"
     properties:
-      id:
+      _id:
         type: "integer"
         description: " a uniqe id for the document"
+      title:
+        type: "string"
+        description: " a title to display for the view filter"
       createdBy:
         type: "string"
         description: "name of creator"

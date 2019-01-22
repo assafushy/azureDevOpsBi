@@ -5,6 +5,7 @@ var app = require('express')();
 const mongoose = require('mongoose');
 const bluebird = require('bluebird');
 const cors = require('cors');
+const morgan = require('morgan');
 
 module.exports = app; // for testing
 
@@ -15,7 +16,7 @@ var config = {
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
   app.use(cors());
-  
+  // app.use(morgan);
   // install middleware
   swaggerExpress.register(app);
 

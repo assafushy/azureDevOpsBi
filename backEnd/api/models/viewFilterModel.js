@@ -6,6 +6,7 @@ autoIncrement.initialize(mongoose);
 
 const viewFilterSchema = new Schema({
   _id: Number,
+  title:String,
   createdBy: String,
   changeDates: [{date:String, changedBy:String}],
   projectList: Array,
