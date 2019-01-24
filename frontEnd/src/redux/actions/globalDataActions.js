@@ -6,6 +6,7 @@ import {fetchAllGitReposetories,fetchAllTFVCReposetories,fetchSrcContorlTrendCha
 import {fetchAllBuildDefinitions} from './buildDefenitionsDataActions';
 
 import _ from 'lodash';
+let moment = require('moment');
 
 export function fetchAllServerProjects(){   
   // eslint-disable-next-line 
@@ -57,19 +58,27 @@ export function SelectedDeselectProjects(projectId){
 
 }//SelectedDeselectProjects
 
-export function setSelectedProjects(){ 
+//sets the selected projects - if supplied with viewFilter then sets the selected to the viewFilter
+export function setSelectedProjects(viewFilter){ 
   let selectedProjects;
-    
-  let globalData = store.getState().globalData.teamProjectsData.value;
+  let globalData;
+
+  if(viewFilter){
+    globalData = viewFilter.projectList;
+  }else{
+    globalData = store.getState().globalData.teamProjectsData.value;
+  }
+  
   selectedProjects = globalData.filter((teamProject)=>{
     if(teamProject.selected === undefined || teamProject.selected === true ){
       return teamProject;
     }
     return false;
   })//filter
+
   store.dispatch({type:C.SELECT_PROJECT,payload:selectedProjects});
   UpdateGlobalState(selectedProjects);
-}//fetchAllServerProjects
+}//setSelectedProjects
 
 export async function UpdateGlobalState(selectedProjects){
   console.log("started updateGlobalState");
@@ -98,7 +107,18 @@ export async function fetchViewFilters(){
 
 }//fetchViewFilters
 
-export async function saveNewViewFilter(newViewFilter){  
+export async function saveNewViewFilter(newViewFilterTitle,createdBy='Default'){  
+  
+  let filterProjectList = store.getState().globalData.selectedTeamProject;
+  let currentDate = moment().format();
+  let newViewFilter = {
+    title:newViewFilterTitle,
+    createdBy:createdBy,
+    changeDates:[{date:currentDate ,changedBy:createdBy}],
+    projectList:filterProjectList
+  };
+  
+  console.log(newViewFilter);
   let res = await postNewViewFilter(newViewFilter);
   console.log(`post view filter respones:`);
   console.log(res);

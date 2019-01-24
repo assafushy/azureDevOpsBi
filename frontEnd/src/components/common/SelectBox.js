@@ -28,28 +28,27 @@ export default class componentName extends Component {
     return (
       <div>
         <FormControl>
-                <InputLabel style={{color:'white'}} htmlFor="select-multiple-checkbox">
-                  {this.props.title}
-                </InputLabel>
-                <Select
-                  multiple
-                  value={[]}
-                  onChange={(e,child)=>{store.dispatch(SelectedDeselectProjects(child.key))}}
-                  input={<Input id="select-multiple-checkbox" />}
-                  renderValue={selected=>selected}
-                  style={{minWidth:200,color:'white'}}
-                >
-                  {(this.props.dataList !== 0 && this.props.dataList !== undefined)?
-                    this.props.dataList.value.map(item => (
-                    <MenuItem key={item.id} value={item.name}>
-                      <Checkbox checked={this.isSelected(item.selected)} />
-                      <ListItemText primary={item.name} />
-                    </MenuItem>
-                  ))
-                  : null}
-                  </Select>
-                 </FormControl> 
-              
+          <InputLabel style={{color:'white',fontSize:15}} htmlFor="select-multiple-checkbox">
+            {this.props.title}
+          </InputLabel>
+          <Select
+            multiple
+            value={[]}
+            onChange={(e,child)=>{store.dispatch(SelectedDeselectProjects(child.key))}}
+            input={<Input id="select-multiple-checkbox" />}
+            renderValue={selected=>selected}
+            style={{minWidth:200,color:'white',}}
+          >
+            {(this.props.dataList !== 0 && this.props.dataList !== undefined)?
+              this.props.dataList.value.map(item => (
+              <MenuItem key={item.id} value={item.name}>
+                <Checkbox checked={this.isSelected(item.selected)} />
+                <ListItemText primary={item.name} />
+              </MenuItem>
+            ))
+            : null}
+            </Select>
+        </FormControl>      
       </div>
     )
   }

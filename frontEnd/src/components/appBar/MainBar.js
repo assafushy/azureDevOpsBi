@@ -5,7 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-import TopLevelFilterSet from '../common/TopLevelFilterSet';
+import TopLevelFilterSet from './TopLevelFilterSet';
 
 export default class MainBar extends Component {
   render() {

@@ -14,6 +14,8 @@ export default (state={
       return{...state,teamProjectsData:action.payload}
     case C.FETCH_VIEW_FILTERS:
       return{...state,viewFilters:action.payload}   
+    case C.SELECT_VIEW_FILTER:
+      return{...state,teamProjectsData:action.payload}   
     case C.SELECT_PROJECT:
       return{...state,selectedTeamProject:{...state.teamProjectsData,value:action.payload}}
     default:

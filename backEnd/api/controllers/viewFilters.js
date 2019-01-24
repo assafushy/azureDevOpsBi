@@ -13,7 +13,7 @@ async function GetAllViewFilters(req,res){
 }
 
 async function AddViewFilter(req,res){
-  console.log(`Adding view filter: ${req.swagger.params.newViewFilter.value}`);
+  console.log(`Adding view filter: ${JSON.stringify(req.swagger.params.newViewFilter.value)}`);
   let newFilter={};
   try{
     newFilter = await viewFilters.create(req.swagger.params.newViewFilter.value);
