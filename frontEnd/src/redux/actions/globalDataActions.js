@@ -64,19 +64,45 @@ export function setSelectedProjects(viewFilter){
   let globalData;
 
   if(viewFilter){
-    globalData = viewFilter.projectList.value;
-    console.log(globalData)
+    switch (viewFilter) {
+      case 'select':
+        break;
+      case 'deselect':
+        break;
+      default:
+        globalData = viewFilter.projectList.value;
+        console.log(globalData)
+        break;
+    }//switch
   }else{
     globalData = store.getState().globalData.teamProjectsData.value;
   }
   
-  selectedProjects = globalData.filter((teamProject)=>{
-    if(teamProject.selected === undefined || teamProject.selected === true ){
-      return teamProject;
-    }
-    return false;
-  })//filter
-
+  switch (viewFilter) {
+    case 'select':
+      globalData = store.getState().globalData.teamProjectsData.value;
+      selectedProjects = globalData.map((teamProject)=>{
+        teamProject.selected = true;
+        return teamProject;
+      })//map
+      break;
+    case 'deselect':
+      globalData = store.getState().globalData.teamProjectsData.value;  
+      selectedProjects = globalData.map((teamProject)=>{
+          teamProject.selected = false;
+          return teamProject;
+      })//map
+      break;
+    default:
+      selectedProjects = globalData.filter((teamProject)=>{
+        if(teamProject.selected === undefined || teamProject.selected === true ){
+          return teamProject;
+        }
+        return false;
+      })//filter
+      break;
+  }//switch
+  
   store.dispatch({type:C.SELECT_PROJECT,payload:globalData});
   UpdateGlobalState(selectedProjects);
 }//setSelectedProjects

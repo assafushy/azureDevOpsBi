@@ -4,6 +4,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import IconButton from '@material-ui/core/IconButton';
 import FilterList from '@material-ui/icons/FilterList';
 import SaveIcon from '@material-ui/icons/Save';
+import SelectAll from '@material-ui/icons/SelectAll';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
@@ -47,7 +48,11 @@ class ViewFiltersSelect extends Component {
   handleClose = () => {
     console.log()
     this.setState({ anchorEl: null });
-  };
+  }
+
+  SelectDeselctAll(selectDeselect){
+    setSelectedProjects(selectDeselect);
+  }//SelectDeselctAll
 
   render() {
     const { anchorEl } = this.state;
@@ -76,6 +81,28 @@ class ViewFiltersSelect extends Component {
             <SaveIcon />
           </ListItemIcon>
           <ListItemText inset primary="Save This View" />
+        </MenuItem>
+        <MenuItem
+          onClick={()=>{
+            this.SelectDeselctAll('deselect');
+            this.handleClose();
+            
+        }}>
+          <ListItemIcon>
+            <SelectAll />
+          </ListItemIcon>
+          <ListItemText inset primary="Deselect All" />
+        </MenuItem>
+        <MenuItem
+          onClick={()=>{
+            this.SelectDeselctAll('select');
+            this.handleClose();
+            
+        }}>
+          <ListItemIcon>
+            <SelectAll />
+          </ListItemIcon>
+          <ListItemText inset primary="Select All" />
         </MenuItem>
 
         {(this.props.data)?
