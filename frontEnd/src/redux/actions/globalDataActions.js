@@ -64,7 +64,8 @@ export function setSelectedProjects(viewFilter){
   let globalData;
 
   if(viewFilter){
-    globalData = viewFilter.projectList;
+    globalData = viewFilter.projectList.value;
+    console.log(globalData)
   }else{
     globalData = store.getState().globalData.teamProjectsData.value;
   }
@@ -76,7 +77,7 @@ export function setSelectedProjects(viewFilter){
     return false;
   })//filter
 
-  store.dispatch({type:C.SELECT_PROJECT,payload:selectedProjects});
+  store.dispatch({type:C.SELECT_PROJECT,payload:globalData});
   UpdateGlobalState(selectedProjects);
 }//setSelectedProjects
 

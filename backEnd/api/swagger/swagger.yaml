@@ -112,10 +112,16 @@ definitions:
         items:
           $ref: "#/definitions/createDateHistoryItem"
       projectList:
-        type: "array"
-        description: "the listof project and their properties"
-        items:
-          $ref: "#/definitions/projectItem"
+        type: "object"
+        properties:
+          count:
+            type: "integer"
+            description: "the number of projects in the array - including unselected ones"
+          value:
+            type: "array"
+            description: "the listof project and their properties"
+            items:
+              $ref: "#/definitions/projectItem"
       isActive:
         type: "boolean"
         description: "specifiy is the document available to the users"
@@ -132,9 +138,31 @@ definitions:
 #----------------------------------------------------------------  
   projectItem:
     type: "object"
+    description: "an object that contains a team project properties"
     properties:
       id:
         type: "string"
-        description: "the project id in azureDevops server"
+        description: "team project's id"
+      name:
+        type: "string"
+        description: " team project's description"
+      description:
+        type: "string"
+        description: "team project's description"
+      revision:
+        type: "integer"
+        description: "team project's revision"
+      state:
+        type: "string"
+        description: "team project's state"
+      url:
+        type: "string"
+        description: "team project's url"
+      visibility:
+        type: "string"
+        description: "is it a public project"
       
-  
+            
+      
+      
+   

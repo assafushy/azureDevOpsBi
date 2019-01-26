@@ -10,6 +10,9 @@ import config from './configFiles/config.js';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const THEME = createMuiTheme({
+  body:{
+    "overflow-y":"auto"  
+  },
   typography: {
    "fontFamily": "\"Roboto\", \"Helvetica\", \"Arial\", sans-serif",
    "fontSize": 25,

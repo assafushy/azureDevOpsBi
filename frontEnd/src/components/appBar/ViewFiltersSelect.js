@@ -8,7 +8,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import ViewFilterSaveModal from './ViewFilterSaveModal';
-import {saveNewViewFilter} from '../../redux/actions/globalDataActions';
+import {saveNewViewFilter,setSelectedProjects} from '../../redux/actions/globalDataActions';
 
 const ITEM_HEIGHT = 48;
 
@@ -40,7 +40,7 @@ class ViewFiltersSelect extends Component {
     if(option === 'save'){
       this.setState({openModal:true});
     }else{
-
+      setSelectedProjects(option);
     }
   }
 
@@ -88,7 +88,7 @@ class ViewFiltersSelect extends Component {
                 this.handleFilterSelection(option)
                 }
               }>
-              {option.createdBy}
+              {option.title}
             </MenuItem>
           )):
           null}

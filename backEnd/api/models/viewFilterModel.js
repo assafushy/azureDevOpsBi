@@ -9,7 +9,7 @@ const viewFilterSchema = new Schema({
   title:String,
   createdBy: String,
   changeDates: [{date:String, changedBy:String}],
-  projectList: Array,
+  projectList: Object,
   isActive:	Boolean
 },{ collection: 'viewFilters' });
 

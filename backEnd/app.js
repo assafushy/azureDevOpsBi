@@ -16,7 +16,7 @@ var config = {
 SwaggerExpress.create(config, function(err, swaggerExpress) {
   if (err) { throw err; }
   app.use(cors());
-  // app.use(morgan);
+  app.use(morgan("tiny"));
   // install middleware
   swaggerExpress.register(app);
 
@@ -24,7 +24,7 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
   
   mongoose.Promise = bluebird;
   console.log(`container is up with ENV var DOCKER = ${JSON.stringify(process.env.DOCKER)}`);
-  let mongoUrl = (process.env.DOCKER)? 'mongodb://mongo:27017/azuredevopsbi': 'mongodb://localhost:27017/azuredevopsbi';
+  let mongoUrl = (process.env.DOCKER)? 'mongodb://mongo:27017/azuredevopsbi' : 'mongodb://localhost:27017/azuredevopsbi';
   mongoose.connect(mongoUrl,{ useNewUrlParser: true });
   mongoose.connection.on('error', console.error.bind(console, 'connection error:'));
   mongoose.connection.once('open',()=>{

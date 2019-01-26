@@ -26,7 +26,7 @@ class TopLevelFilterSet extends Component {
       <div>
         <Grid container spacing={8}>
           <Grid item sm={4}>
-            <SelectBox title="Team Projects FIlter" dataList={(this.props.globalData.teamProjectsData.value)?this.props.globalData.teamProjectsData:{value:[{name:'Fetching data'}]}}/>
+            <SelectBox title="Team Projects FIlter" dataList={(this.props.globalData.teamProjectsData.value)?this.props.globalData.selectedTeamProject:{value:[{name:'Fetching data'}]}}/>
            </Grid>
           <Grid item sm={4}>
              <ViewFiltersSelect data={this.props.globalData.viewFilters}/>   
