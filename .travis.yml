@@ -2,17 +2,16 @@ language: node_js
 node_js:
   - "stable"
 env:
-  NODE_ENV=TEST
+ NODE_ENV=TEST
 addons:
   sonarcloud:
     organization: "assafushy-github"
     token:
       secure: "50da54348a6458acfbd49443b33763bcdc6167fa"
-before_install: 
-  - sonar-scanner
-  - cd frontEnd
+before_install: cd frontEnd
 install:
-  - npm install
+  npm install
 script:
+  - sonar-scanner
   - npm test
   - npm run build
