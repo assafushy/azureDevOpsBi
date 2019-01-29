@@ -8,13 +8,11 @@ addons:
     organization: "assafushy-github"
     token:
       secure: "50da54348a6458acfbd49443b33763bcdc6167fa"
-  
 before_install: 
+  - sonar-scanner
   - cd frontEnd
 install:
   - npm install
 script:
-  - cd..
-  - sonar-scanner
   - npm test
   - npm run build
