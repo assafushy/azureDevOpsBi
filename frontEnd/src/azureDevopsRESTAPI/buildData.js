@@ -24,7 +24,7 @@ export async function fetchAllActiveGitReposBuildDefenitions(teamProjectsList,gi
   await Promise.all(teamProjectsList.map(async (teamProject)=>{
     let projectBuildObject = {id:teamProject.id,name:teamProject.name,repoCount:0,count:0,CICount:0,repoList:[]}
     //filter all project Repos
-    let projectRepoList = _.filter(gitReposList,repo=>repo.project.id == teamProject.id);
+    let projectRepoList = _.filter(gitReposList,repo=>repo.project.id === teamProject.id);
     //skips projects with no active repos
     if(projectRepoList.length > 0){
       let finalRepoList = await Promise.all(projectRepoList.map(async (repo)=>{
@@ -53,6 +53,7 @@ export async function fetchAllActiveGitReposBuildDefenitions(teamProjectsList,gi
                     isCI = true;
                   }//if
                 }//if
+                return true;
               }))//Promise.all
             }))//Promise.all
           }else{

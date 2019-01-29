@@ -54,7 +54,7 @@ export default class BuildStatsTab extends Component {
           <Grid item sm={12}>
           { (this.props.buildData.buildDefentionsByGitRepos.value)?
             this.props.buildData.buildDefentionsByGitRepos.value.map((teamData,i)=>{
-            return <TeamProjectCard data={teamData}/>
+            return <TeamProjectCard key={i} data={teamData}/>
           }):null}
           </Grid>   
         </Grid>

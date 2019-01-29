@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -54,15 +50,17 @@ class BuildByRepoTable extends Component {
 
   triggerBranchesToString(buildDefList){
     let triggetBranchList = '';
-    console.log(buildDefList);
     buildDefList.map((build)=>{
       if(build.triggers){
         build.triggers.map((trigger)=>{
           trigger.branchFilters.map((branch)=>{
             triggetBranchList += branch + ' ';
+            return true;
           });
+          return true;
         });
       }//if
+      return true;
     });
     return triggetBranchList;
   }//triggerBranchesToString
