@@ -12,6 +12,6 @@ before_install: cd frontEnd
 install:
   npm install
 script:
-  - sonar-scanner -X
+  - sonar-scanner
   - npm test
   - npm run build
