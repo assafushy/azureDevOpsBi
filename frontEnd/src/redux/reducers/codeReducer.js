@@ -9,7 +9,7 @@ export default (state={
 										"TFVCActiveReposByMonth":[],
 									}
 								}
-                    ,action) =>{
+                    ,action=null) =>{
 
     switch(action.type){
 			case C.FETCH_ALL_PROJECTS__GIT_REPOS:

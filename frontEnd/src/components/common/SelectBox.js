@@ -11,7 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {SelectedDeselectProjects} from '../../redux/actions/globalDataActions';
 import store from '../../redux/store';
 
-export default class componentName extends Component {
+export default class SelectBox extends Component {
   
   isSelected(isSelected){
     if(isSelected){
