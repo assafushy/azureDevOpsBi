@@ -1,0 +1,168 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Azuredevops BI API
+# during dev, should point to your local machine
+host: localhost:10010
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /viewFilter:
+    get:
+      description: "Endpoint returns all the saved viewFilters in the database"
+      operationId: "GetAllViewFilters"
+      responses:
+        200:
+          description: "an array of viewFilters"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ViewFilter"
+      x-swagger-router-controller: "viewFilters"
+#----------------------------------------------------------------------
+    post:
+      description: "Endpoint that adds a new viewFilter to the db"
+      operationId: "AddViewFilter"
+      produces: 
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "newViewFilter"
+        description: "The view filter to add"
+        required: true
+        schema:
+          $ref: "#/definitions/ViewFilter"
+      responses:
+        200:
+          description: "an updated list of all the view filters including the one added "
+          schema:
+            $ref: "#/definitions/ViewFilter"
+      x-swagger-router-controller: "viewFilters"
+#---------------------------------------------------------------------- 
+  /viewFilter/{id}:
+    delete:
+      description: "Endpoint that removes a viewFilter by id to the db"
+      operationId: "DeleteViewFilterById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the view filter to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        204:
+          description: "View filter deleted"
+      x-swagger-router-controller: "viewFilters" 
+#---------------------------------------------------------------------- 
+    put:
+      description: "Endpoint that updates a viewFilter by id in the db"
+      operationId: "UpdateViewFilterById"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the view filter to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "updatedViewFilter"
+        in: "body"
+        description: "The view filter detailes to update"
+        required: true
+        schema: 
+          $ref: "#/definitions/ViewFilter"
+      responses:
+        200:
+          description: "View filter updated"
+        400:
+          description: "Error updating view filters"
+      x-swagger-router-controller: "viewFilters" 
+#---------------------------------------------------------------------- 
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+#----------------------------------------------------------------  
+  ViewFilter:
+    type: "object"
+    properties:
+      _id:
+        type: "integer"
+        description: " a uniqe id for the document"
+      title:
+        type: "string"
+        description: " a title to display for the view filter"
+      createdBy:
+        type: "string"
+        description: "name of creator"
+      changeDates:
+        type: "array"
+        description: "list of all dates that the document was updated"
+        items:
+          $ref: "#/definitions/createDateHistoryItem"
+      projectList:
+        type: "object"
+        properties:
+          count:
+            type: "integer"
+            description: "the number of projects in the array - including unselected ones"
+          value:
+            type: "array"
+            description: "the listof project and their properties"
+            items:
+              $ref: "#/definitions/projectItem"
+      isActive:
+        type: "boolean"
+        description: "specifiy is the document available to the users"
+#----------------------------------------------------------------  
+  createDateHistoryItem:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+        description: "a string repesentation of a javascript object"
+      changedBy:
+        type: "string"
+        description: "the user name that made the changes"
+#----------------------------------------------------------------  
+  projectItem:
+    type: "object"
+    description: "an object that contains a team project properties"
+    properties:
+      id:
+        type: "string"
+        description: "team project's id"
+      name:
+        type: "string"
+        description: " team project's description"
+      description:
+        type: "string"
+        description: "team project's description"
+      revision:
+        type: "integer"
+        description: "team project's revision"
+      state:
+        type: "string"
+        description: "team project's state"
+      url:
+        type: "string"
+        description: "team project's url"
+      visibility:
+        type: "string"
+        description: "is it a public project"
+      
+            
+      
+      
+   

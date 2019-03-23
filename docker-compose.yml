@@ -1,0 +1,34 @@
+version: "2"
+services:
+  backend:
+    container_name: backEnd
+    environment:
+    - DOCKER=true
+    restart: always
+    build: .\backEnd
+    volumes:
+    - ./backend:/usr/src/app
+    - ./backend/node_modules:/usr/src/app/node_modules
+    ports: 
+      - "10010:10010"
+    links: 
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+  frontend:
+    container_name: frontEnd
+    environment:
+    - DOCKER=true
+    restart: always
+    build: .\frontEnd
+    volumes:
+    - ./frontEnd:/usr/src/app
+    - ./frontEnd/node_modules:/usr/src/app/node_modules
+    ports: 
+      - "3000:3000"
+      - "35729:35729"
+    links: 
+      - backend
