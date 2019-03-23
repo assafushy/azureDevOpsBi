@@ -18,7 +18,7 @@ class ViewFiltersSelect extends Component {
   
   constructor() {
     super();
-    this. state = {
+    this.state = {
       anchorEl: null,
       openModal:false
     }

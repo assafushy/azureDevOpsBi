@@ -4,11 +4,11 @@ export default (state={
                     "collectionData" : [],
                     "selectedCollections":[],
                     "teamProjectsData": [],
-                    "selectedTeamProject":[],
+                    "selectedTeamProject":{"value":[]},
                     "viewFilters":[],
                     "globalSettings":{"activeRepoPeriodInMonths":1}
                     }
-                    ,action) =>{
+                    ,action=null) =>{
   switch(action.type){
     case C.FETCH_PROJECTS:
       return{...state,teamProjectsData:action.payload}

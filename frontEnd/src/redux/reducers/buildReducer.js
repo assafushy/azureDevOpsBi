@@ -3,7 +3,7 @@ import C from '../../configFiles/constants.json';
 export default (state={
 									"buildDefentionsByGitRepos" : []
 									}
-                    ,action) =>{
+                    ,action=null) =>{
 
     switch(action.type){
 			case C.FETCH_BUILD_DEFENITIONS_GIT_REPOS:

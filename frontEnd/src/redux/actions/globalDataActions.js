@@ -9,17 +9,17 @@ import _ from 'lodash';
 let moment = require('moment');
 
 export function fetchAllServerProjects(){   
-  // eslint-disable-next-line 
-  let projectData=[];
+
+ 
   let selectedProjects;
   // store.dispatch(isLoading(true));
   const req = getProjectList();
     return (dispatch)=>{  
       return req.then((data)=>{
-        projectData=data.data.value;
+        
         dispatch({type:C.FETCH_PROJECTS,payload:data.data})
         fetchViewFilters();   
-    ;})
+    })
     .then(()=>{
       let globalData = store.getState().globalData.teamProjectsData.value;
       selectedProjects = globalData.filter((teamProject)=>{
@@ -94,12 +94,17 @@ export function setSelectedProjects(viewFilter){
       })//map
       break;
     default:
+    try{
       selectedProjects = globalData.filter((teamProject)=>{
         if(teamProject.selected === undefined || teamProject.selected === true ){
           return teamProject;
         }
         return false;
       })//filter
+    }catch(error){
+      console.log(`globalData recieved was: ${globalData}`);
+      selectedProjects = []; 
+    }
       break;
   }//switch
   

@@ -1,7 +1,5 @@
 import Config from '../configFiles/config';
 import axios from 'axios';
-import _ from 'lodash';
-
 
 //fetches all ViewFilters form DB
 export async function fetchAllViewFilters() { 
