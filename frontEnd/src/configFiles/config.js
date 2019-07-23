@@ -3,8 +3,10 @@ var config = {
   dev: "development",
   BI_API_BASE_URL: "",
   port: process.env.PORT || 3000,
-  BASE_URL: process.env.REACT_APP_URL,
-  AccessToken: process.env.REACT_APP_APIKEY
+  BASE_URL: process.env.REACT_APP_URL || "https://assafushy.visualstudio.com",
+  AccessToken:
+    process.env.REACT_APP_APIKEY ||
+    "vwpvjp7nkoibak7qguo7dahgbno5shbtsa23pwibw674mxswmm6q"
 };
 
 config.BI_API_BASE_URL = process.env.DOCKER
