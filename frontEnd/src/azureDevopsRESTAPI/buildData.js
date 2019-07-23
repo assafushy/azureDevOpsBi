@@ -105,11 +105,13 @@ async function getRepoData(repo) {
   return repoData;
 } //getRepoData
 
-async function isCIBuild(buildDefentionList) {
+async function isCIBuild(buildDefentionList = []) {
   let isCI = false;
-  console.log(buildDefentionList);
   await Promise.all(
     buildDefentionList.map(async buildDefenetion => {
+      if (!buildDefenetion.triggers) {
+        buildDefenetion.triggers = [];
+      }
       await Promise.all(
         buildDefenetion.triggers.map(trigger => {
           console.log(trigger);
