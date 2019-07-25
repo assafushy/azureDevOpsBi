@@ -4,7 +4,7 @@ import _ from "lodash";
 import TeamProjectCard from "../../common/TeamProjectCard";
 import BuildPieChart from "./buildStatsComponents/BuildPieChart";
 
-export default class BuildStatsTab extends Component {
+export default class PolicyStatsTab extends Component {
   teamProjectDataFactory(
     teamProjectArray = { value: [] },
     repoArray = [],
@@ -58,33 +58,34 @@ export default class BuildStatsTab extends Component {
   } //calculateBuildGraphData
 
   render() {
+    console.log(this.props.policyData);
     return (
       <div>
         <br />
         <Grid container spacing={12}>
           <Grid item sm={12}>
-            <BuildPieChart
+            {/* <BuildPieChart
               chartData={this.calculateBuildGraphData(
                 this.props.repoData.count,
                 this.props.buildData.buildDefentionsByGitRepos.count,
                 this.props.buildData.buildDefentionsByGitRepos.CICount
               )}
-            />
+            /> */}
           </Grid>
           <Grid item sm={12}>
-            {this.props.buildData.buildDefentionsByGitRepos.value
-              ? this.props.buildData.buildDefentionsByGitRepos.value.map(
-                  (teamData, i) => {
-                    return (
-                      <TeamProjectCard
-                        key={i}
-                        data={teamData}
-                        teamCardType={"build"}
-                      />
-                    );
-                  }
-                )
-              : null}
+            {this.props.policyData.policyByTeamProject ? (
+              this.props.policyData.policyByTeamProject.map((teamData, i) => {
+                return teamData.repoList.length > 0 ? (
+                  <TeamProjectCard
+                    key={i}
+                    data={teamData}
+                    teamCardType={"policy"}
+                  />
+                ) : null;
+              })
+            ) : (
+              <h1>nothing to show</h1>
+            )}
           </Grid>
         </Grid>
       </div>

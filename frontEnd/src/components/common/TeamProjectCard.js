@@ -7,9 +7,10 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 
-import Config from "../../../../configFiles/config";
-import BuldByRepoTable from "./BuildByRepoTable";
-import BuildPieChart from "./BuildPieChart";
+import Config from "../../configFiles/config";
+import PolicyByRepoTable from "../codePage/tabs/policyStatsComponents/PolicyByRepoTable";
+import BuildByRepoTable from "../codePage/tabs/buildStatsComponents/BuildByRepoTable";
+import BuildPieChart from "../codePage/tabs/buildStatsComponents/BuildPieChart";
 
 const styles = {
   card: {
@@ -29,6 +30,17 @@ class TeamProjectCard extends Component {
     return [noBuild, noCi, ciNum];
   } //calculateBuildGraphData
 
+  cardTableFactory(cardType, data) {
+    switch (cardType) {
+      case "build":
+        return <BuildByRepoTable data={data} />;
+      case "policy":
+        return <PolicyByRepoTable data={data} />;
+      default:
+        return <p>Nothing to show :(</p>;
+    }
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -45,16 +57,19 @@ class TeamProjectCard extends Component {
             <Grid container spacing={12}>
               <Grid item sm={6} />
               <Grid item sm={6}>
-                <BuildPieChart
+                {/* <BuildPieChart
                   chartData={this.calculateBuildGraphData(
                     this.props.data.repoCount,
                     this.props.data.count,
                     this.props.data.CICount
                   )}
-                />
+                /> */}
               </Grid>
               <Grid item sm={12}>
-                <BuldByRepoTable data={this.props.data.repoList} />
+                {this.cardTableFactory(
+                  this.props.teamCardType,
+                  this.props.data.repoList
+                )}
               </Grid>
             </Grid>
           </CardContent>
@@ -62,10 +77,24 @@ class TeamProjectCard extends Component {
             <Button
               size="small"
               onClick={() => {
-                window.open(
-                  `${Config.BASE_URL}/${this.props.data.name}/_build`
-                );
-                console.log(this.props.data);
+                switch (this.props.teamCardType) {
+                  case "policy":
+                    window.open(
+                      `${Config.BASE_URL}/${
+                        this.props.data.name
+                      }/_settings/policies`
+                    );
+                    break;
+                  case "build":
+                    window.open(
+                      `${Config.BASE_URL}/${this.props.data.name}/_build`
+                    );
+                    break;
+                  default:
+                    break;
+                }
+
+                // console.log(this.props.data);
               }}
             >
               Learn More

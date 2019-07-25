@@ -45,7 +45,7 @@ export async function fetchAllActiveGitReposBuildDefenitions(
         buildDefentionList.CICount += projectData.CICount;
         buildDefentionList.value.push(projectData);
       } else {
-        console.log(`no active repos for ${JSON.stringify(teamProject)}`);
+        // console.log(`no active repos for ${JSON.stringify(teamProject)}`);
       }
     }) //.map
   ); //Promise.all
@@ -114,7 +114,7 @@ async function isCIBuild(buildDefentionList = []) {
       }
       await Promise.all(
         buildDefenetion.triggers.map(trigger => {
-          console.log(trigger);
+          // console.log(trigger);
           if (trigger.triggerType === "continuousIntegration") {
             isCI = true;
           } //if

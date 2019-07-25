@@ -71,7 +71,7 @@ class TeamProjectCard extends Component {
             <Button
               size="small"
               onClick={() => {
-                console.log(this.props);
+                // console.log(this.props);
                 window.open(
                   `${Config.BASE_URL}/${this.props.teamProject.title}`
                 );

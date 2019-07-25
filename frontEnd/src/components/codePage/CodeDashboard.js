@@ -4,6 +4,7 @@ import Tab from "@material-ui/core/Tab";
 
 import GitVSTfvcTab from "./tabs/GitVSTfvcTab";
 import BuildStatsTab from "./tabs/BuildStatsTab";
+import PolicyStatsTab from "./tabs/PolicyStatsTab";
 import GitIcon from "../../svgCustomIcons/git.svg";
 import BuildIcon from "../../imgs/icons/buildIcon.svg";
 import GitBranchIcon from "../../svgCustomIcons/git-branch.svg";
@@ -12,7 +13,7 @@ class CodeDashboard extends Component {
   constructor() {
     super();
     this.state = {
-      activeTabValue: 1
+      activeTabValue: 2
     };
   } //constructor
 
@@ -63,7 +64,11 @@ class CodeDashboard extends Component {
           />
         )}
         {this.state.activeTabValue === 2 && (
-          <h1 align={"center"}>Under Construction</h1>
+          <PolicyStatsTab
+            buildData={this.props.buildData}
+            repoData={this.props.codeData.gitRepos}
+            policyData={this.props.policyData}
+          />
         )}
       </div>
     );
