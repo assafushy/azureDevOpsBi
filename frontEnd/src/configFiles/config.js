@@ -6,7 +6,7 @@ var config = {
   BASE_URL: process.env.REACT_APP_URL || "https://assafushy.visualstudio.com",
   AccessToken:
     process.env.REACT_APP_APIKEY ||
-    "vwpvjp7nkoibak7qguo7dahgbno5shbtsa23pwibw674mxswmm6q"
+    "757dizpspynp2v3562h2odlgz6qlb6ieguxgvswav5y4aeodkvnq"
 };
 
 config.BI_API_BASE_URL = process.env.DOCKER

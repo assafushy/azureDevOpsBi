@@ -9,11 +9,7 @@ export async function fetchAllBuildDefinitionsForGitRepo(RepoData) {
   try {
     // console.log(`${Config.BASE_URL}/${RepoData.project.id}/_apis/build/definitions?includeAllProperties=true&repositoryType=TfsGit&repositoryId=${RepoData.id}`);
     res = await axios.get(
-      `${Config.BASE_URL}/${
-        RepoData.project.id
-      }/_apis/build/definitions?includeAllProperties=true&repositoryType=TfsGit&repositoryId=${
-        RepoData.id
-      }`
+      `${Config.BASE_URL}/${RepoData.project.id}/_apis/build/definitions?includeAllProperties=true&repositoryType=TfsGit&repositoryId=${RepoData.id}`
     );
   } catch (error) {
     console.log(
@@ -69,8 +65,8 @@ async function getProjectData(teamProject, projectRepoList) {
     projectRepoList.map(async repo => {
       projectBuildObject.repoCount += 1;
       let repoData = await getRepoData(repo);
-      projectBuildObject.count += repoData.count;
-      projectBuildObject.CICount += repoData.CICount;
+      projectBuildObject.count += repoData.count ? 1 : 0;
+      projectBuildObject.CICount += repoData.CICount ? 1 : 0;
       projectBuildObject.repoList.push(repoData);
     })
   );
@@ -95,18 +91,16 @@ async function getRepoData(repo) {
     repoData.count = repoBuildDefenitions.count;
     repoData.buildDefentionList = repoBuildDefenitions.value;
 
-    let isCI = await isCIBuild(repoData.buildDefentionList);
-    console.log(`for repo ${repoData.name} CI is ${isCI}`);
-    if (isCI) {
-      repoData.CICount += 1;
-    }
+    let CIBuilds = await isCIBuild(repoData.buildDefentionList);
+    console.log(`for repo ${repoData.name} CI is ${CIBuilds}`);
+    repoData.CICount += CIBuilds;
   }
 
   return repoData;
 } //getRepoData
 
 async function isCIBuild(buildDefentionList = []) {
-  let isCI = false;
+  let CIBuilds = 0;
   await Promise.all(
     buildDefentionList.map(async buildDefenetion => {
       if (!buildDefenetion.triggers) {
@@ -116,15 +110,11 @@ async function isCIBuild(buildDefentionList = []) {
         buildDefenetion.triggers.map(trigger => {
           // console.log(trigger);
           if (trigger.triggerType === "continuousIntegration") {
-            isCI = true;
+            CIBuilds += 1;
           } //if
         }) //.map
       ); //Promise.all
     }) //.map
   ); //Promise.all
-  if (isCI) {
-    return true;
-  } else {
-    return false;
-  }
+  return CIBuilds;
 } //isCIBuild
