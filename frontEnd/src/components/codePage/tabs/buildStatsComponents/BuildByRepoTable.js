@@ -52,11 +52,14 @@ class BuildByRepoTable extends Component {
     buildDefList.map(build => {
       if (build.triggers) {
         build.triggers.map(trigger => {
-          trigger.branchFilters.map(branch => {
-            triggetBranchList += branch + " ";
+          if (trigger.branchFilters) {
+            trigger.branchFilters.map(branch => {
+              triggetBranchList += branch + " ";
+              return true;
+            });
+          } else {
             return true;
-          });
-          return true;
+          }
         });
       } //if
       return true;
