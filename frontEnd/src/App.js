@@ -13,6 +13,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import CodeIcon from "@material-ui/icons/Code";
+import SettingsIcon from "@material-ui/icons/Settings";
 import Button from "@material-ui/core/Button";
 import CachedIcon from "@material-ui/icons/Cached";
 
@@ -26,7 +27,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      toggleDrawerMenu: false
+      toggleDrawerMenu: false,
+      activeDashboard: "code"
     };
   } //constructor
 
@@ -39,6 +41,10 @@ class App extends Component {
       ? this.setState({ toggleDrawerMenu: false })
       : this.setState({ toggleDrawerMenu: true });
   } //toggleDrawer
+
+  switchDashboard(dashboardName) {
+    this.setState({ activeDashboard: dashboardName });
+  }
 
   //adding a comment
   render() {
@@ -66,21 +72,49 @@ class App extends Component {
             }}
           >
             <List>
-              <ListItem button key={"code"}>
+              <ListItem
+                button
+                key={"code"}
+                onClick={() => {
+                  this.switchDashboard("code");
+                }}
+              >
                 <ListItemIcon>
                   <CodeIcon />
                 </ListItemIcon>
                 <ListItemText primary={"Code"} />
               </ListItem>
+              <ListItem
+                button
+                key={"Settings"}
+                onClick={() => {
+                  this.switchDashboard("settings");
+                }}
+              >
+                <ListItemIcon>
+                  <SettingsIcon />
+                </ListItemIcon>
+                <ListItemText primary={"Settings"} />
+              </ListItem>
             </List>
           </div>
         </Drawer>
-        <CodeDashboard
-          globalData={this.props.globalData}
-          codeData={this.props.codeData}
-          buildData={this.props.buildData}
-          policyData={this.props.policyData}
-        />
+        {this.state.activeDashboard === "code" ? (
+          <CodeDashboard
+            globalData={this.props.globalData}
+            codeData={this.props.codeData}
+            buildData={this.props.buildData}
+            policyData={this.props.policyData}
+          />
+        ) : null}
+        {this.state.activeDashboard === "settings" ? (
+          <CodeDashboard
+            globalData={this.props.globalData}
+            codeData={this.props.codeData}
+            buildData={this.props.buildData}
+            policyData={this.props.policyData}
+          />
+        ) : null}
         <Button
           style={fabStyle}
           onClick={() => {
